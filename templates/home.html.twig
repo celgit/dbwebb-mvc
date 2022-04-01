@@ -1,17 +1,25 @@
-{% include 'incl/header.twig' %}
+{% extends "base.html.twig" %}
 
-<body>
+{% block title %}Home{% endblock %}
 
-vafan?
-<div class="grid wrapper">
-    {% include 'incl/nav.twig' %}
-    <div class="main">
-        Hem, här är hemmet, behöver bild också...<br>
-        <img src="../public/img/notReallyMe.png" alt="Img done did gone?"/>
-    </div>
+{% block content %}
+    <h1>Welcome to my homepage!</h1>
 
+    Howdy!<br>
+    My name is Christofer and this is a short text about me.<br>
     <br>
+    I'm doing this course as the last part of the 2nd course package<br>
+    which, together with the first course package, is the first year of a<br>
+    3 year education at BTH.<br>
+    <br>
+    As an occupation I'm a developer since june of last year, a lot thanks to these courses.<br>
+    <br>
+    I hope you enjoy this webpage.<br>
+    You can find my github-page <a href="https://github.com/celgit/dbwebb-design" target="_blank">here.</a><br>
+    <br>
+    (I'm fully aware of the lack of design and "optimization" of the layout regarding text and such, this course isn't about that, hence, not getting focus)<br>
+    <br>
+    This below is not a picture of me, but a simpsonized version.<br>
 
-    {% include 'incl/footer.twig' %}
-</div>
-</body>
+    <img src="img/notReallyMe.png" alt="Nope"/>
+{% endblock %}

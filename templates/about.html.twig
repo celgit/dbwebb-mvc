@@ -1,2 +1,30 @@
+{% extends "base.html.twig" %}
 
-<h1>OOOOOM</h1>
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h1>About</h1>
+    <p>
+        This page is about the MVC-course at BTH.<br>
+        <br>
+        MVC stands for Model, View & Controller and is about <br>
+        the concept of separates the application data and business logic (model),<br>
+        from the presentation (view). The controller is the mediate between those.<br>
+        It's also known as object oriented php.<br>
+        <br>
+        The purpose of this course:<br>
+        <i>
+            "To independently, according to a specification, be able to develope<br>
+            and publish a web application where object oriented programming where framework <br>
+            and databases has a central part."<br>
+        </i>
+        <br>
+        Random link to lucky-number:
+        <a href="{{ url("lucky-number") }}" target="_blank">Lucky-number</a>
+        <br>
+
+        You will find the course github-page if you click on the leaf below.
+    </p>
+
+    <a href="https://github.com/dbwebb-se/mvc/" target="_blank"><img src="img/leaf_256x256.png" width="300px" alt="php"/></a>
+{% endblock %}

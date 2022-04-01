@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,5 +31,28 @@ class ReportController extends AbstractController
     public function report(): Response
     {
         return $this->render('report.html.twig');
+    }
+
+    /**
+     * @Route("/api/lucky/number", name="lucky-number")
+     */
+    public function number(): Response
+    {
+        $number = random_int(0, 100);
+
+        $data = [
+            'message' => 'Welcome to the lucky number API',
+            'lucky-number' => $number
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * @Route("/debug", name="debug")
+     */
+    public function debug(): Response
+    {
+        return $this->render('debug.html.twig');
     }
 }
