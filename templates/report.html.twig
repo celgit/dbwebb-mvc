@@ -3,7 +3,9 @@
 {% block title %}Report{% endblock %}
 
 {% block content %}
-    <h1>Report</h1>
-
-    <img src="img/rincewind.jpg" alt="Omg"/>
+    <div class="textHandle">
+        {% apply markdown_to_html %}
+            {{ contentFromMarkdownFile }}
+        {% endapply %}
+    </div>
 {% endblock %}

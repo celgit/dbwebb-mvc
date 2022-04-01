@@ -30,7 +30,14 @@ class ReportController extends AbstractController
      */
     public function report(): Response
     {
-        return $this->render('report.html.twig');
+        $fileName = "../content/report.md";
+        $data = [
+            'contentFromMarkdownFile' => file_get_contents($fileName)
+        ];
+
+
+
+        return $this->render('report.html.twig', $data);
     }
 
     /**
@@ -53,6 +60,11 @@ class ReportController extends AbstractController
      */
     public function debug(): Response
     {
-        return $this->render('debug.html.twig');
+        $data = [
+            'message' => 'Welcome to the lucky number API',
+            'number' => random_int(0, 100)
+        ];
+
+        return $this->render('debug.html.twig', $data);
     }
 }
