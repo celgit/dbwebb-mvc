@@ -1,0 +1,70 @@
+.slide {
+    overflow-y: hidden !important;
+    transition: height 0.5s ease-in !important;
+}
+
+.nav ul {
+    display: inline-block;
+    justify-content: flex-end;
+    padding: 1em 0;
+    list-style: none;
+    background-color: #7fb3d5;
+}
+
+.nav ul li {
+    padding: 0 1em;
+    display: inline-block;
+}
+
+.nav a, .nav-toggle {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 0.7rem;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav a:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.nav a.active {
+    color: tomato;
+    background-color: SeaShell;
+}
+
+@media (max-width: 767px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        padding-bottom: 1em;
+    }
+
+    .nav ul li {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav ul li a {
+        display: block;
+        padding: 0.5em 0;
+    }
+
+    .js .nav-toggle {
+        display: block;
+        float: right;
+        width: 2em;
+        margin: 0.6667em 0;
+        font-size: 1.5rem;
+        line-height: 2em;
+        text-align: center;
+        cursor: pointer;
+    }
+}
