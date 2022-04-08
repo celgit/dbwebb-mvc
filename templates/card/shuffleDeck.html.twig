@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Shuffle deck{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>The entire deck, shuffled!</legend>
+            <p>omg it's a card deck!</p>
+            {% for card in deck %}
+                <div class="card {{ card.color }}">
+                    {{ card.value }}
+                    <span class="symbol">
+                    {{ card.suite|raw }}
+                </span>
+                </div>
+            {% endfor %}
+        </fieldset>
+    </div>
+{% endblock %}

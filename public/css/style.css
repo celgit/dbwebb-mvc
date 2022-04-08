@@ -79,3 +79,32 @@ table, th, td {
   color: whitesmoke;
   margin-top: 10px;
 }
+
+legend {
+  text-align: center;
+}
+
+.almostCenter{
+  margin-left: 47%;
+}
+
+.card {
+  width: 50px;
+  height: 90px;
+  border: 1px solid black;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.symbol {
+  font-size: 50px;
+  margin-left: 5px;
+}

@@ -67,4 +67,12 @@ class ReportController extends AbstractController
 
         return $this->render('debug.html.twig', $data);
     }
+
+    /**
+     * @Route("/exercises", name="exercises")
+     */
+    public function exercises(): Response
+    {
+        return $this->render('exercises.html.twig');
+    }
 }

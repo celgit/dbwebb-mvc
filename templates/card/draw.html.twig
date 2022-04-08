@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>One card was drawn</legend>
+            <p>This card was drawn:</p>
+            <div class="card {{ drawnCard[0].color }}">
+                {{ drawnCard[0].value }}
+                <span class="symbol">
+                        {{ drawnCard[0].suite|raw }}
+                    </span>
+            </div>
+            <p>Remaining cards:</p>
+            {% for card in deck %}
+                <div class="card {{ card.color }}">
+                    {{ card.value }}
+                    <span class="symbol">
+                        {{ card.suite|raw }}
+                    </span>
+                </div>
+            {% endfor %}
+        </fieldset>
+    </div>
+{% endblock %}

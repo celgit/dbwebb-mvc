@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>All them card linkz0rz</legend>
+        <ul>
+            <li><a href="{{ path("deck") }}">Show entire deck</a></li>
+            <li><a href="{{ path("shuffle-deck") }}">Shuffle deck</a></li>
+            <li><a href="{{ path("draw-card") }}">Draw a card</a></li>
+            <li><a href="{{ path("draw-number-of-cards") }}">Draw number x of cards</a></li>
+{#            <li><a href="{{ path("draw-number-of-cards") }}">Draw number x of cards</a></li>#}
+        </ul>
+    </fieldset>
+</div>
+{% endblock %}
