@@ -9,7 +9,6 @@ class Deck
     private array $deck = [];
     private array $suits = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
     private array $values = [
-        '1',
         '2',
         '3',
         '4',
@@ -48,12 +47,13 @@ class Deck
     public function drawGivenNumOfCards($numCardsToDraw): array
     {
         $drawnCards = [];
+        $drawnCardsCounter = 0;
 
         for ($i = 0; $i < $numCardsToDraw; $i++) {
-            $randomNumber = random_int(0, 51);
-            $drawnCard = $this->deck[$randomNumber];
-            $drawnCards[] = $drawnCard;
+            $randomNumber = random_int(0, 51 - $drawnCardsCounter);
+            $drawnCards[] = $this->deck[$randomNumber];
             array_splice($this->deck, $randomNumber, 1);
+            $drawnCardsCounter++;
         }
 
         return $drawnCards;
