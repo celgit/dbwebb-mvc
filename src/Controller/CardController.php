@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Cards\Deck;
 use App\Cards\Hand;
+use App\Cards\PlayerHands;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,15 +38,19 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/shuffle", name="shuffle-deck")
      */
-    public function shuffle(): Response
+    public function shuffle(SessionInterface $session): Response
     {
-        $emptyDeck = new Deck();
-        $filledDeck = $emptyDeck->createNewDeck();
+        $newDeck = new Deck();
+        $newDeck->createNewDeck();
 
-        shuffle($filledDeck);
+        $newDeck->shuffleDeck();
+
+        $newDeck = $newDeck->getDeck();
+
+        $session->set('deck', $newDeck);
 
         $data = [
-            'deck' => $filledDeck
+            'deck' => $newDeck
         ];
         return $this->render('card/shuffleDeck.html.twig', $data);
     }
@@ -58,50 +63,26 @@ class CardController extends AbstractController
      *     methods={"GET"})
      * @throws \Exception
      */
-    public function drawNumberOfCards(Request $request, SessionInterface $session, int $numOfDraws = 1): Response
-    {
-        $draw  = $request->request->get('numOfDraws');
-        $clear = $request->request->get('clear');
-
-        $hand  = $session->get('hand') ?? new Hand();
-        $deck = $session->get("deck") ?? new Deck();
-
-        if ($draw) {
-            if (count($deck) < 1) {
-                $this->addFlash("error", "Deck is empty!");
-            } else {
-                $drawnCards = $deck->drawGivenNumOfCards($numOfDraws);
-
-                foreach ($drawnCards as $drawnCard) {
-                    $hand->placeCardInHand($drawnCard);
-                }
-
-                $this->addFlash("info", "You draw a card and placed it in your hand");
-            }
-            $session->set("deck", $deck->getDeck());
-            $session->set("hand", $hand);
-        } elseif ($clear) {
-            $this->addFlash("warning", "You've reset the deck.");
-            $session->set("deck", $deck->createNewDeck());
-            $session->set("hand", $hand->getHand());
-        }
-
-        $this->addFlash("info", "Info-message placeholder");
+    public function drawNumberOfCards(
+        Request $request,
+        SessionInterface $session,
+        int $numOfDraws
+    ): Response {
+        $deck = new Deck();
+        $deck->addToDeck($session->get('deck'));
 
         $numOfGivenDraws = $numOfDraws;
-
-
-
 
         if ($numOfGivenDraws > 52) {
             $numOfGivenDraws = 52;
         }
 
         $drawnCards[] = $deck->drawGivenNumOfCards($numOfGivenDraws);
+        $session->set('deck', $deck->getDeck());
 
         $data = [
             'deck' => $deck->getDeck(),
-            'numOfDraws' => $request->query->get('numOfDraws'),
+            'numOfDraws' => $request->get('numOfDraws'),
             'drawnCards' => $drawnCards
         ];
 
@@ -117,6 +98,57 @@ class CardController extends AbstractController
      */
     public function drawMultipleCardsRedirect(Request $request)
     {
+        error_log(print_r('------------------------ASD--------------------', true));
+        error_log(print_r($request->request->get('numOfDraws'), true));
         return $this->redirectToRoute('draw-number-of-cards', ['numOfDraws' => $request->request->get('numOfDraws')]);
+    }
+
+    /**
+     * @Route("/card/deck/draw", name="draw-card")
+     * @Route(
+     *     "/card/deck/deal/{players}/{numOfCards}",
+     *     name="deal-cards-to-players"
+     * )
+     * @throws \Exception
+     */
+    public function dealCardsToPlayers(
+//        Request $request,
+        SessionInterface $session,
+        int $players,
+        int $numOfCards
+    ): Response {
+        $newDeck = new Deck();
+        $newDeck->createNewDeck();
+
+        $newDeck->shuffleDeck();
+
+        $playerHands = [];
+
+        for ($i = 0; $i < $players; $i++) {
+            $playerHands[] = $newDeck->drawGivenNumOfCards($numOfCards);
+        }
+        $data = [
+            'deck' => $newDeck->getDeck(),
+            'players' => $players,
+            'numOfCards' => $numOfCards,
+            'playerHands' => $playerHands
+        ];
+
+        return $this->render('card/dealCardsToPlayers.html.twig', $data);
+    }
+
+    /**
+     * @Route(
+     *     "/card/deck/dealings",
+     *     name="deal-cards-to-players-redirect",
+     *     methods={"POST"})
+     * @throws \Exception
+     */
+    public function dealCardsToPlayersRedirect(Request $request)
+    {
+        return $this->redirectToRoute('deal-cards-to-players',
+            ['players' => $request->request->get('players'),
+            'numOfCards' => $request->request->get('numOfCards')]
+        );
     }
 }

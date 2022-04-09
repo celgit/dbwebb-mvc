@@ -10,8 +10,15 @@
             <li><a href="{{ path("deck") }}">Show entire deck</a></li>
             <li><a href="{{ path("shuffle-deck") }}">Shuffle deck</a></li>
             <li><a href="{{ path("draw-card") }}">Draw a card</a></li>
-            <li><a href="{{ path("draw-number-of-cards",  {numOfDraws:0}) }}">Draw random number of cards</a></li>
+            <li><a href="{{ path("draw-number-of-cards",  {numOfDraws:0}) }}">Draw X number of cards</a></li>
         </ul>
+        <form method="POST" action="{{ path("deal-cards-to-players-redirect") }}">
+            <p><Label>Enter number of players and cards to deal:</Label><br>
+                <label>Players: </label><input type="number" name="players" value="">
+                <label>Number of cards: </label><input type="number" name="numOfCards" value="">
+                <input type="submit" name="deal" value="deal">
+            </p>
+        </form>
     </fieldset>
 </div>
 {% endblock %}

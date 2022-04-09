@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>Player-hands</legend>
+            <form method="POST" action="{{ path("deal-cards-to-players-redirect") }}">
+                <p><Label>Enter number of players and cards to re-deal:</Label><br>
+                    <label>Players: </label><input type="number" name="players" value="{{ players }}">
+                    <label>Number of cards: </label><input type="number" name="numOfCards" value="{{ numOfCards }}">
+                    <input type="submit" name="deal" value="deal">
+                </p>
+            </form>
+            {% set playerId = 1 %}
+            {% for playerHand in playerHands %}
+            <p>
+                Player {{ playerId }}:
+                {% for card in playerHand %}
+                    <div class="card {{ card.getColor() }}">
+                        {{ card.getValue() }}
+                        <span class="symbol">
+                            {{ card.getSuite()|raw }}
+                    </span>
+                    </div>
+                {% endfor %}
+                {% set playerId = playerId + 1 %}
+            </p>
+
+            {% endfor %}
+            <p>Remaining cards:</p>
+            {% for card in deck %}
+                <div class="card {{ card.getColor() }}">
+                    {{ card.getValue() }}
+                    <span class="symbol">
+                        {{ card.getSuite()|raw }}
+                    </span>
+                </div>
+            {% endfor %}
+        </fieldset>
+    </div>
+{% endblock %}

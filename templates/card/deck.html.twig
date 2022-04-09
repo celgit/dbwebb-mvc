@@ -7,10 +7,10 @@
     <fieldset>
         <legend>The entire deck</legend>
         {% for card in deck %}
-            <div class="card {{ card.color }}">
-                {{ card.value }}
+            <div class="card {{ card.getColor() }}">
+                {{ card.getValue() }}
                 <span class="symbol">
-                    {{ card.suite|raw }}
+                    {{ card.getSuite()|raw }}
                 </span>
             </div>
         {% endfor %}

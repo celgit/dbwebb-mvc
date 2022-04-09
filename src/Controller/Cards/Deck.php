@@ -31,14 +31,12 @@ class Deck
             $color = $this->getCorrectColor($suit);
 
             foreach ($this->values as $value) {
-                $this->deck[] = [
-                    'suite' => $suit,
-                    'color' => $color,
-                    'value' => $value];
+                $card = new Card($suit, $value, $color);
+                $this->deck[] = $card;
             }
         }
 
-        return $this->deck;
+        return $this;
     }
 
     /**
@@ -47,13 +45,16 @@ class Deck
     public function drawGivenNumOfCards($numCardsToDraw): array
     {
         $drawnCards = [];
-        $drawnCardsCounter = 0;
+        $deckSize = count($this->deck);
+
+        if ($numCardsToDraw > $deckSize) {
+            $numCardsToDraw = $deckSize;
+        }
 
         for ($i = 0; $i < $numCardsToDraw; $i++) {
-            $randomNumber = random_int(0, 51 - $drawnCardsCounter);
+            $randomNumber = random_int(0, count($this->deck) - 1);
             $drawnCards[] = $this->deck[$randomNumber];
             array_splice($this->deck, $randomNumber, 1);
-            $drawnCardsCounter++;
         }
 
         return $drawnCards;
@@ -62,6 +63,21 @@ class Deck
     public function getDeck(): array
     {
         return $this->deck;
+    }
+
+    public function shuffleDeck()
+    {
+        $shuffleDeck = $this->getDeck();
+        shuffle($shuffleDeck);
+
+        $this->deck = $shuffleDeck;
+    }
+
+    public function addToDeck($arrayOfCards): void
+    {
+        foreach ($arrayOfCards as $card) {
+            $this->deck[] = $card;
+        }
     }
 
     private function getCorrectColor($suite)

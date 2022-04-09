@@ -14,19 +14,19 @@
             </form>
             <p>This/these card/s was drawn:</p>
             {% for drawnCard in drawnCards[0] %}
-                <div class="card {{ drawnCard.color }}">
-                    {{ drawnCard.value }}
+                <div class="card {{ drawnCard.getColor() }}">
+                    {{ drawnCard.getValue() }}
                     <span class="symbol">
-                            {{ drawnCard.suite|raw }}
+                            {{ drawnCard.getSuite()|raw }}
                     </span>
                 </div>
             {% endfor %}
             <p>Remaining cards:</p>
             {% for card in deck %}
-                <div class="card {{ card.color }}">
-                    {{ card.value }}
+                <div class="card {{ card.getColor() }}">
+                    {{ card.getValue() }}
                     <span class="symbol">
-                        {{ card.suite|raw }}
+                        {{ card.getSuite()|raw }}
                     </span>
                 </div>
             {% endfor %}
