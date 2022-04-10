@@ -3,8 +3,7 @@
 namespace App\Controller;
 
 use App\Cards\Deck;
-use App\Cards\Hand;
-use App\Cards\PlayerHands;
+use App\Cards\DeckOfJokers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +23,37 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck", name="deck")
      */
-    public function show(): Response
+    public function showDeck(): Response
     {
-        $emptyDeck = new Deck();
-        $filledDeck = $emptyDeck->createNewDeck();
+        $newDeck = new Deck();
+        $newDeck->createNewDeck();
+
+        $newDeck = $newDeck->getDeck();
 
         $data = [
-            'deck' => $filledDeck
+            'deck' => $newDeck
         ];
         return $this->render('card/deck.html.twig', $data);
+    }
+
+    /**
+     * @Route("/card/deck2", name="deck2")
+     */
+    public function showDeck2(): Response
+    {
+        $newDeck = new Deck();
+        $newDeck->createNewDeck();
+        $newDeck = $newDeck->getDeck();
+
+        $newDeckOfJokers = new DeckOfJokers();
+        $newDeckOfJokers->createNewDeck();
+        $newDeckOfJokers = $newDeckOfJokers->getDeckOfJokers();
+
+        $data = [
+            'deck' => $newDeck,
+            'deckOfJokers' => $newDeckOfJokers,
+        ];
+        return $this->render('card/deck2.html.twig', $data);
     }
 
     /**
@@ -66,7 +87,7 @@ class CardController extends AbstractController
     public function drawNumberOfCards(
         Request $request,
         SessionInterface $session,
-        int $numOfDraws
+        int $numOfDraws = 1
     ): Response {
         $deck = new Deck();
         $deck->addToDeck($session->get('deck'));
@@ -98,13 +119,10 @@ class CardController extends AbstractController
      */
     public function drawMultipleCardsRedirect(Request $request)
     {
-        error_log(print_r('------------------------ASD--------------------', true));
-        error_log(print_r($request->request->get('numOfDraws'), true));
         return $this->redirectToRoute('draw-number-of-cards', ['numOfDraws' => $request->request->get('numOfDraws')]);
     }
 
     /**
-     * @Route("/card/deck/draw", name="draw-card")
      * @Route(
      *     "/card/deck/deal/{players}/{numOfCards}",
      *     name="deal-cards-to-players"
@@ -112,7 +130,6 @@ class CardController extends AbstractController
      * @throws \Exception
      */
     public function dealCardsToPlayers(
-//        Request $request,
         SessionInterface $session,
         int $players,
         int $numOfCards
