@@ -110,6 +110,7 @@ class CardController extends AbstractController
         $deck = new Deck();
         if ($session->get('deck') === null) {
             $deck->createNewDeck();
+            $deck->shuffleDeck();
         } else {
             $deck->addToDeck($session->get('deck'));
         }
