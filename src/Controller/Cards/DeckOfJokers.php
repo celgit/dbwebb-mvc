@@ -10,7 +10,7 @@ class DeckOfJokers extends Deck
     private array $jokers = ["&#x2733;", "&#x2733;"];
 
 
-    public function createNewDeck()
+    public function createNewDeck(): DeckOfJokers|static
     {
         foreach ($this->jokers as $joker) {
             $card = new Card($joker, 'Joker', 'green');
