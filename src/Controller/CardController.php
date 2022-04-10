@@ -21,10 +21,8 @@ class CardController extends AbstractController
         return $this->render('card/start.html.twig');
     }
 
-//GET card/api/deck
-
     /**
-     * @Route("/card/api/deck", name="deckJson")
+     * @Route("/card/api/deck", name="deck-json")
      */
     public function deckAsJson(): Response
     {
@@ -37,7 +35,7 @@ class CardController extends AbstractController
             'jsonDeck' => $jsonDeck
         ];
 
-        return $this->render('card/jsonDeck.html.twig', $data);
+        return $this->render('card/json-deck.html.twig', $data);
     }
 
     /**
@@ -93,7 +91,7 @@ class CardController extends AbstractController
         $data = [
             'deck' => $newDeck
         ];
-        return $this->render('card/shuffleDeck.html.twig', $data);
+        return $this->render('card/shuffle-deck.html.twig', $data);
     }
 
     /**
@@ -110,7 +108,11 @@ class CardController extends AbstractController
         int $numOfDraws = 1
     ): Response {
         $deck = new Deck();
-        $deck->addToDeck($session->get('deck'));
+        if ($session->get('deck') === null) {
+            $deck->createNewDeck();
+        } else {
+            $deck->addToDeck($session->get('deck'));
+        }
 
         $numOfGivenDraws = $numOfDraws;
 
@@ -127,7 +129,7 @@ class CardController extends AbstractController
             'drawnCards' => $drawnCards
         ];
 
-        return $this->render('card/drawMultipleCards.html.twig', $data);
+        return $this->render('card/draw-multiple-cards.html.twig', $data);
     }
 
     /**
@@ -171,7 +173,7 @@ class CardController extends AbstractController
             'playerHands' => $playerHands
         ];
 
-        return $this->render('card/dealCardsToPlayers.html.twig', $data);
+        return $this->render('card/deal-cards-to-players.html.twig', $data);
     }
 
     /**

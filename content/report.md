@@ -13,15 +13,13 @@ Redovisning
   *Att man kan starta en mini-webb-server direkt i terminalen, det var smidigt! (det var dock inte lika enkelt att döda processen om man startat den i bakgrunden).*
 
 ### Kmom02 - Objektorientering
-  #### _FRÅGA_
+  #### _Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP._
   *SVAR.*
-  #### _FRÅGA_
+  #### _Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?_
   *SVAR.*
-  #### _FRÅGA_
+  #### _Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?_
   *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
+  #### _Vilken är din TIL för detta kmom?_
   *SVAR.*
 
 ### Kmom03 - Enhetstestning
