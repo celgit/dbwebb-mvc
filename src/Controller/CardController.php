@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Cards\Deck;
 use App\Cards\DeckOfJokers;
+use App\Cards\JsonDeck;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,25 @@ class CardController extends AbstractController
     public function start(): Response
     {
         return $this->render('card/start.html.twig');
+    }
+
+//GET card/api/deck
+
+    /**
+     * @Route("/card/api/deck", name="deckJson")
+     */
+    public function deckAsJson(): Response
+    {
+        $jsonDeck = new JsonDeck();
+        $jsonDeck->createNewDeck();
+
+        $jsonDeck = $jsonDeck->getJsonDeck();
+
+        $data = [
+            'jsonDeck' => $jsonDeck
+        ];
+
+        return $this->render('card/jsonDeck.html.twig', $data);
     }
 
     /**
@@ -163,7 +183,8 @@ class CardController extends AbstractController
      */
     public function dealCardsToPlayersRedirect(Request $request)
     {
-        return $this->redirectToRoute('deal-cards-to-players',
+        return $this->redirectToRoute(
+            'deal-cards-to-players',
             ['players' => $request->request->get('players'),
             'numOfCards' => $request->request->get('numOfCards')]
         );

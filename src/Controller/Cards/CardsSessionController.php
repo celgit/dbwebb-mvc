@@ -45,7 +45,6 @@ class CardsSessionController extends AbstractController
             if (count($deck) < 1) { // Deck is empty, error
                 $this->addFlash("error", "Deck is empty!");
             } else {
-
                 $this->addFlash("info", "You draw a card and placed it in your hand");
             }
             $session->set("deck", $deck);

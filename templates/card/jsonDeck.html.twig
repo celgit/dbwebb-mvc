@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Deck{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>The entire deck in JSON</legend>
+        {{ jsonDeck }}
+    </fieldset>
+</div>
+{% endblock %}

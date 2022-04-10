@@ -12,6 +12,7 @@
             <li><a href="{{ path("shuffle-deck") }}">Shuffle deck</a></li>
             <li><a href="{{ path("draw-card") }}">Draw a card</a></li>
             <li><a href="{{ path("draw-number-of-cards",  {numOfDraws:0}) }}">Draw X number of cards</a></li>
+            <li><a href="{{ path("deckJson") }}">JsonDeck</a></li>
         </ul>
         <form method="POST" action="{{ path("deal-cards-to-players-redirect") }}">
             <p><Label>Enter number of players and cards to deal:</Label><br>

@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-
 namespace App\Cards;
 
 class Card
 {
-    private string $suite;
-    private string $value;
-    private string $color;
+    public string $suite;
+    public string $value;
+    public string $color;
 
     /**
      * @param string $suite
