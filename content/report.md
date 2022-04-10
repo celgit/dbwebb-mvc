@@ -14,13 +14,20 @@ Redovisning
 
 ### Kmom02 - Objektorientering
   #### _Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP._
-  *SVAR.*
+  *Arv är när en klass ärver en annan, det innebär att allt från första klassen blir tillgängligt för den som ärver så den inte behöver ha samma metoder. Komposition är en annan typ av relation. När klass B ärver klass A är den en klass A, men när i komposition har klass A en klass B, som t.ex. att en bil har en motor, där bil är klass A och motor klass B.*
+  *Interface är en spec över vilka metoder alla klasser som implementerar interfacet lovar att ha. Interfacet talar om för anropare vad klasserna som följer det har att erbjuda.*
+  *Ett trait är en typ av funktion/metod som flera klasser kan använda sig av, som gemensamma moduler. Om flera klasser har nytta av att använda en metod som hämtar data från extern länk, då kan man använda ett gemensamt trait ist för att uppfinna hjulet i varje klass.*
   #### _Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?_
-  *SVAR.*
+  *Jag fann uppgiften helt otroligt överjävligt enorm till att börja med. Grunden i min lösning är att jag skapade en klass Deck, som innehåller klassen Card. Det är decken som har ordning på suits å valörer å sånt, card har bara koll på att den har en suite, en valör och en färg.*
+  *Jag började göra en klass för playerHands, men tiden räckte inte till, det fick bli en vanlig deck.*
+  *Jag är dock väldigt nöjd med hur mina metoder för att bygga upp de olika decksen, när man t.ex. dra kort etc*
+  *Tycker dock det var lite kasst att man fick lägga tid på att designa korten med css då det tog viktig tid från det som denna kursen eg. handlar om.*
+  *Det finns mycket man kan göra i min klass för att förbättra, man kan bryta ner metoderna ner och göra de mindre och simplare samt skapa en klass för händerna.*
   #### _Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?_
-  *SVAR.*
+  *Skippade denna biten då det blev för mycket, efter förslag från Mos i discord. Hela momentet var för stort och han sa att vi skulle skjuta på den biten.*
+  *Kan dock ändå säga att pseudo-kod och konceptualisering är ändå bra då PO:s och kunder inte pratar programmering, man måste beskriva applikationen på ett bra sätt som även de förstår, då är pseudokod riktigt bra.*
   #### _Vilken är din TIL för detta kmom?_
-  *SVAR.*
+  *Sessions-hanteringen tror jag att jag lärde mig, men det var riktigt krångligt. Sen lärde jag mig också att en redirekt kan hjälpa i de fall där man vill ta med sig datan in i adressfältet.*
 
 ### Kmom03 - Enhetstestning
   #### _FRÅGA_
