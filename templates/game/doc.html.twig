@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>Doc</legend>
+        <h2>Flow chart</h2>
+        <img src="../img/21dia_v2.jpg" alt="dia"/>
+
+        <h2>Pseudo code</h2>
+        <ol>
+            <li>Game starts</li>
+            <li>Player starts first</li>
+            <li>Draw card</li>
+            <li>Draw another card</li>
+            <ol>
+                <li>If yes then:</li>
+                <ol>
+                    <li>Draw card</li>
+                </ol>
+            </ol>
+            <li>Are the cards worth more than 21?</li>
+            <ol>
+                <li>If yes then:</li>
+                <ol>
+                    <li>Does the cards belong to the dealer or player?</li>
+                    <ol>
+                        <li>Player</li>
+                        <p>Dealer wins!</p>
+                    </ol>
+                    <ol>
+                        <li>Dealer</li>
+                        <p>Player wins!</p>
+                    </ol>
+                </ol>
+            </ol>
+            <li>Has the dealer played?</li>
+            <ol>
+                <li>If no then:</li>
+                <ol>
+                    <li>Dealer plays:</li>
+                    <ol>
+                        <li>Draw card</li>
+                    </ol>
+                </ol>
+            </ol>
+            <li>Are the players cards worth less than the dealers?</li>
+            <ol>
+                <li>If yes then:</li>
+                <p>Dealer wins!</p>
+                <li>Else:</li>
+                <p>Player wins!</p>
+            </ol>
+
+        </ol>
+
+        <h2>Code classes</h2>
+        <p>
+            I will have following classes:<br>
+            <ul>
+            <li>Deck</li>
+                <i>Is a deck with multiple Card-objects, based on attributes defined in the Deck-class</i>
+            <li>Card</li>
+                <i>Contains the type of attributes to be defined for each Card.</i>
+            <li>Hand</li>
+                <i>Child of deck, is the same as Deck but on a smaller scale, for each player/dealer</i>
+            <li>Game</li>
+                <i>Handles all the rules for the game.</i>
+            </ul>
+        </p>
+    </fieldset>
+</div>
+{% endblock %}

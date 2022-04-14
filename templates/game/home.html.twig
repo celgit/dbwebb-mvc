@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cards{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>Welcome to the game!</legend>
+        <a href="https://sv.wikipedia.org/wiki/Tjugoett_(kortspel)">Rules</a>
+
+        <p>Här ska kort beskrivning av kortspelet å reglerna stå, samt länk till doc.</p>
+
+        <a href="{{ path("game-doc") }}">To the doc!</a>
+
+        <p> Press "Play" to start the game (FIXA!)</p>
+        <form method="POST" action="{{ path("deal-cards-to-players-redirect") }}">
+            <p><Label>Enter number of players and cards to deal:</Label><br>
+                <label>Players: </label><input type="number" name="players" value="">
+                <input type="submit" name="deal" value="Play">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{% endblock %}
