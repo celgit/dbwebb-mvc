@@ -19,7 +19,7 @@ class JsonDeck extends Deck
         ];
 
         $response = new Response();
-        $response->setContent(json_encode($data['jsondeck']));
+        $response->setContent(json_encode($data['jsondeck'], JSON_THROW_ON_ERROR));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

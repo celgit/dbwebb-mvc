@@ -6,9 +6,9 @@ namespace App\Cards;
 
 class Deck
 {
-    private array $deck = [];
-    private array $suits = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
-    private array $values = [
+    private array $deck;
+    private const SUITS = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
+    private const CARD_VALUES = [
         '2',
         '3',
         '4',
@@ -24,13 +24,21 @@ class Deck
         'A'
     ];
 
-
-    public function createNewDeck()
+    /**
+     * @param array $deck
+     */
+    public function __construct(array $deck = [])
     {
-        foreach ($this->suits as $suit) {
+        $this->deck = $deck;
+    }
+
+
+    public function createNewDeck(): static
+    {
+        foreach (self::SUITS as $suit) {
             $color = $this->getCorrectColor($suit);
 
-            foreach ($this->values as $value) {
+            foreach (self::CARD_VALUES as $value) {
                 $card = new Card($suit, $value, $color);
                 $this->deck[] = $card;
             }
@@ -42,7 +50,7 @@ class Deck
     /**
      * @throws \Exception
      */
-    public function drawGivenNumOfCards($numCardsToDraw): array
+    public function drawGivenNumOfCards(int $numCardsToDraw): array
     {
         $drawnCards = [];
         $deckSize = count($this->deck);
@@ -65,7 +73,7 @@ class Deck
         return $this->deck;
     }
 
-    public function shuffleDeck()
+    public function shuffleDeck(): void
     {
         $shuffleDeck = $this->getDeck();
         shuffle($shuffleDeck);
@@ -73,14 +81,14 @@ class Deck
         $this->deck = $shuffleDeck;
     }
 
-    public function addToDeck($arrayOfCards): void
+    public function addToDeck(array $cards): void
     {
-        foreach ($arrayOfCards as $card) {
+        foreach ($cards as $card) {
             $this->deck[] = $card;
         }
     }
 
-    private function getCorrectColor($suite)
+    private function getCorrectColor(string $suite): string
     {
         $redSuits = ['&hearts;', '&diams;'];
 

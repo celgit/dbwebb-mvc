@@ -46,7 +46,7 @@ class Card
         return $this->color;
     }
 
-    private function getCorrectColor($suite)
+    private function getCorrectColor(string $suite): string
     {
         $redSuits = ['&hearts;', '&diams;'];
 

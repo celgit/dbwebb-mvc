@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Cards\Deck;
 use App\Cards\DeckOfJokers;
 use App\Cards\JsonDeck;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -140,7 +142,7 @@ class CardController extends AbstractController
      *     methods={"POST"})
      * @throws \Exception
      */
-    public function drawMultipleCardsRedirect(Request $request)
+    public function drawMultipleCardsRedirect(Request $request): RedirectResponse
     {
         return $this->redirectToRoute('draw-number-of-cards', ['numOfDraws' => $request->request->get('numOfDraws')]);
     }
@@ -150,10 +152,9 @@ class CardController extends AbstractController
      *     "/card/deck/deal/{players}/{numOfCards}",
      *     name="deal-cards-to-players"
      * )
-     * @throws \Exception
+     * @throws Exception
      */
     public function dealCardsToPlayers(
-        SessionInterface $session,
         int $players,
         int $numOfCards
     ): Response {
@@ -184,7 +185,7 @@ class CardController extends AbstractController
      *     methods={"POST"})
      * @throws \Exception
      */
-    public function dealCardsToPlayersRedirect(Request $request)
+    public function dealCardsToPlayersRedirect(Request $request): RedirectResponse
     {
         return $this->redirectToRoute(
             'deal-cards-to-players',
