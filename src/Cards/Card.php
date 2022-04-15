@@ -15,13 +15,17 @@ class Card
     /**
      * @param string $suite
      * @param string $value
+     * @param int $valuePoint
      * @param string $color
+     * @param bool $isAce
      */
-    public function __construct(string $suite,
-                                string $value,
-                                int $valuePoint,
-                                string $color,
-                                bool $isAce)
+    public function __construct(
+        string $suite,
+        string $value,
+        int $valuePoint,
+        string $color,
+        bool $isAce
+    )
     {
         $this->suite = $suite;
         $this->value = $value;

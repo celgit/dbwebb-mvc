@@ -11,6 +11,7 @@ use Exception;
 class Hand
 {
     private array $hand = [];
+    public string $valuePointsColor = 'black';
 
     public function getHand(): array
     {
@@ -27,7 +28,7 @@ class Hand
         }
     }
 
-    public function getHandValue()
+    public function getHandValue(): int
     {
         $value = 0;
 
@@ -39,8 +40,16 @@ class Hand
         return $value;
     }
 
-    public function getNumOfCardsInHand()
+    public function getValuePointsColor(): string
     {
-        return count($this->hand);
+        $value = $this->getHandValue();
+
+        if ($value >= 22) {
+            $this->valuePointsColor = 'red';
+        } elseif ($value >= 17) {
+            $this->valuePointsColor = 'green';
+        }
+
+        return $this->valuePointsColor;
     }
 }

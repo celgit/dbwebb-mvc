@@ -6,14 +6,6 @@
     <div class="textHandle">
         <fieldset>
             <legend>Player-hands</legend>
-            <form method="POST">
-                <p><Label>Press "Draw" to draw another card:</Label><br>
-                    <input type="submit" name="draw" value="Draw">
-                </p>
-
-                {{ include('form/flash-message.html.twig') }}
-            </form>
-
             <h1>Player:</h1>
             <p>
                 {% if hands['player'] is not empty %}
@@ -28,18 +20,9 @@
                 {% endif %}
             </p>
             <p> Value of hand:</p>
-            {% if playerHandValue > 21 %}
-                <div class="red">
-                    {{ playerHandValue }} points - Loss!
-            {% elseif playerHandValue >= 17 %}
-                <div class="green">
-                    {{ playerHandValue }} points - You can stop if you want
-            {% else %}
-                <div class="black">
-                    {{ playerHandValue }} points
-            {% endif %}
+            <div class={{ hands['player'].getValuePointsColor }}>
+                {{ playerHandValue }}
             </div>
-
                     <h1>Dealer:</h1>
             <p>
             {% if hands['dealer'] is not empty %}
@@ -54,39 +37,28 @@
             {% endif %}
             </p>
             <p> Value of hand:</p>
-            {% if dealerHandValue > 21 %}
-            <div class="red">
-                {{ dealerHandValue }} points - Loss!
-                {% elseif dealerHandValue >= 17 %}
-                <div class="green">
-                    {{ dealerHandValue }} points - You can stop if you want
-                    {% else %}
-                    <div class="black">
-                        {{ dealerHandValue }} points
-                        {% endif %}
-                    </div>
-
+            <div class={{ hands['dealer'].getValuePointsColor }}>
+                {{ dealerHandValue }}
+            </div>
             <form method="POST">
-                <p><Label>Press "Stop" to continue:</Label><br>
-                    <input type="submit" name="done" value="Done">
-                </p>
-            </form>
-
-            <p>Remaining cards:</p>
-            {% for card in deck %}
-                <div class="card {{ card.getColor() }}">
-                    {{ card.getValue() }}
-                    <span class="symbol">
-                        {{ card.getSuite()|raw }}
-                    </span>
-                </div>
-            {% endfor %}
-
-            <form method="POST">
-                <p><Label>To reset / start over press "Reset" below:</Label><br>
+                <p><Label>Pick an option:</Label><br>
+                    <input type="submit" name="draw" value="Draw"> |
+                    <input type="submit" name="done" value="Done"> |
                     <input type="submit" name="reset" value="Reset">
                 </p>
+
+                {{ include('form/flash-message.html.twig') }}
             </form>
+
+{#            <p>Remaining cards:</p>#}
+{#            {% for card in deck %}#}
+{#                <div class="card {{ card.getColor() }}">#}
+{#                    {{ card.getValue() }}#}
+{#                    <span class="symbol">#}
+{#                        {{ card.getSuite()|raw }}#}
+{#                    </span>#}
+{#                </div>#}
+{#            {% endfor %}#}
         </fieldset>
     </div>
 {% endblock %}

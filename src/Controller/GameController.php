@@ -50,13 +50,13 @@ class GameController extends AbstractController
         $reset = $request->request->get('reset');
         $draw = $request->request->get('draw');
 
-        $dealerHand = $session->get('dealerHand', default: new Hand());
 
         if ($reset || $start) {
             $session->clear();
         }
 
-            $deck = new Deck();
+
+        $deck = new Deck();
 
         if ($session->get('deck') === null) {
             $deck->createNewDeck();
@@ -65,6 +65,8 @@ class GameController extends AbstractController
             $deck->addToDeck($session->get('deck'));
         }
 
+        /** @var Hand $dealerHand */
+        $dealerHand = $session->get('dealerHand', default: new Hand());
         /** @var Hand $playerHand */
         $playerHand = $session->get('playerHand', default: new Hand());
 
@@ -77,8 +79,19 @@ class GameController extends AbstractController
         }
         
         if ($done) {
-            $this->addFlash('info', 'You pressed stop');
-            $session->set('dealersTurn', true);
+            if ($session->get('dealersTurn')) {
+                if ($playerHand->getHandValue() > 21) {
+                    $this->addFlash('info', 'Player is bust, dealer wins!');
+                } elseif ($dealerHand->getHandValue() > 21) {
+                    $this->addFlash('info', 'Dealer is bust, player wins!');
+                }else {
+                    $endGameMessage = $this->getWinnerMessage($playerHand, $dealerHand);
+                    $this->addFlash('info', $endGameMessage);
+                }
+            } else {
+                $session->set('dealersTurn', true);
+                $this->addFlash('info', 'Player is done, dealers turn');
+            }
         }
 
         $hands['player'] = $playerHand;
@@ -90,7 +103,7 @@ class GameController extends AbstractController
             'numOfCards' => $numOfCards,
             'hands' => $hands,
             'playerHandValue' => $playerHand->getHandValue(),
-            'dealerHandValue' => $dealerHand->getHandValue()
+            'dealerHandValue' => $dealerHand->getHandValue(),
         ];
 
         $session->set('playerHand', $playerHand);
@@ -114,5 +127,20 @@ class GameController extends AbstractController
             ['players' => $request->request->get('players'),
                 'numOfCards' => $request->request->get('numOfCards')]
         );
+    }
+
+    private function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
+    {
+        $playerHandValue = $playerHand->getHandValue();
+        $dealerHandValue = $dealerHand->getHandValue();
+
+        if (($playerHandValue <= 21 &&
+            $playerHandValue > $dealerHandValue)) {
+            $winner = 'Player';
+        } else {
+            $winner = 'Dealer';
+        }
+
+        return $winner .  " wins!";
     }
 }
