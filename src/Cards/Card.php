@@ -8,17 +8,24 @@ class Card
 {
     public string $suite;
     public string $value;
+    public int $valuePoint;
     public string $color;
+    public bool $isAce = false;
 
     /**
      * @param string $suite
      * @param string $value
      * @param string $color
      */
-    public function __construct(string $suite, string $value, string $color)
+    public function __construct(string $suite,
+                                string $value,
+                                int $valuePoint,
+                                string $color,
+                                bool $isAce)
     {
         $this->suite = $suite;
         $this->value = $value;
+        $this->valuePoint = $valuePoint;
         $this->color = $color;
     }
 
@@ -36,6 +43,14 @@ class Card
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValuePoint(): int
+    {
+        return $this->valuePoint;
     }
 
     /**

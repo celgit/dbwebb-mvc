@@ -13,7 +13,7 @@ class DeckOfJokers extends Deck
     public function createNewDeck(): static
     {
         foreach ($this->jokers as $joker) {
-            $card = new Card($joker, 'Joker', 'green');
+            $card = new Card($joker, 'Joker', 0, 'green');
             $this->deckOfJokers[] = $card;
         }
         return $this;

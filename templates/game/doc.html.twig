@@ -14,12 +14,20 @@
             <li>Game starts</li>
             <li>Player starts first</li>
             <li>Draw card</li>
-            <li>Draw another card</li>
+            <ol>
+                <li>Are the cards in hand worth 17 or more?</li>
+                <ol>
+                    <li>If no, back to step 3.</li>
+                    <li>If yes, continue.</li>
+                </ol>
+            </ol>
+            <li>Draw another card?</li>
             <ol>
                 <li>If yes then:</li>
                 <ol>
-                    <li>Draw card</li>
+                    <li>Go to back to step 3.</li>
                 </ol>
+                <li>If no: Continue</li>
             </ol>
             <li>Are the cards worth more than 21?</li>
             <ol>
@@ -35,6 +43,7 @@
                         <p>Player wins!</p>
                     </ol>
                 </ol>
+                <li>If no: Continue</li>
             </ol>
             <li>Has the dealer played?</li>
             <ol>

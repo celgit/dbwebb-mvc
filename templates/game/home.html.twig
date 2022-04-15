@@ -6,17 +6,35 @@
 <div class="textHandle">
     <fieldset>
         <legend>Welcome to the game!</legend>
+        <p>
+            The rules are as follows:<br>
+            Draw cards until your hand is worth atleast 17 points.<br>
+            At that point, decide if you want to draw more cards.<br>
+            <br>
+            When you choose to stay (not draw more cards), the dealer <br>
+            goes through the same process.<br>
+            <br>
+            The result can be as follows:<br>
+            <br>
+            Your hand > dealers hand: You win!<br>
+            <br>
+            Dealers hand => your hand: The dealer wins!<br>
+            <br>
+            Good luck!
+            <br>
+        </p>
+        <hr>
+        There are alot of versions of the rules, here is one of them, in Swedish:<br>
         <a href="https://sv.wikipedia.org/wiki/Tjugoett_(kortspel)">Rules</a>
-
-        <p>Här ska kort beskrivning av kortspelet å reglerna stå, samt länk till doc.</p>
-
+        <br>
+        <br>
+        Here you can see more about how the game is built:<br>
         <a href="{{ path("game-doc") }}">To the doc!</a>
 
-        <p> Press "Play" to start the game (FIXA!)</p>
-        <form method="POST" action="{{ path("deal-cards-to-players-redirect") }}">
+        <p> Press "Play" to start the game</p>
+        <form method="POST" action="{{ path("start-game") }}">
             <p><Label>Enter number of players and cards to deal:</Label><br>
-                <label>Players: </label><input type="number" name="players" value="">
-                <input type="submit" name="deal" value="Play">
+                <input type="submit" name="start" value="Play">
             </p>
         </form>
     </fieldset>

@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace App\Cards;
 
+use Exception;
+
 class Deck
 {
     private array $deck;
-    private const SUITS = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
-    private const CARD_VALUES = [
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10',
-        'J',
-        'Q',
-        'K',
-        'A'
+    protected const SUITS = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
+    protected const CARD_VALUES = [
+        '2' => 2,
+        '3' => 3,
+        '4' => 4,
+        '5' => 5,
+        '6' => 6,
+        '7' => 7,
+        '8' => 8,
+        '9' => 9,
+        '10' => 10,
+        'J' => 11,
+        'Q' => 12,
+        'K' => 13,
+        'A' => 14,
+//        'A' => [1, 14] //TODO måste hantera båda värdena av Ess.
     ];
 
     /**
@@ -38,8 +41,8 @@ class Deck
         foreach (self::SUITS as $suit) {
             $color = $this->getCorrectColor($suit);
 
-            foreach (self::CARD_VALUES as $value) {
-                $card = new Card($suit, $value, $color);
+            foreach (self::CARD_VALUES as $value => $valuePoints) {
+                $card = new Card($suit, (string)$value, $valuePoints, $color, is_array($valuePoints));
                 $this->deck[] = $card;
             }
         }
@@ -48,7 +51,7 @@ class Deck
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function drawGivenNumOfCards(int $numCardsToDraw): array
     {
