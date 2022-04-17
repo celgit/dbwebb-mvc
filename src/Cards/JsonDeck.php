@@ -13,7 +13,6 @@ class JsonDeck extends Deck
      */
     public function getJsonDeck(): Response
     {
-
         $data = [
             'jsondeck' => $this->getDeck()
         ];
