@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Cards\Deck;
-use App\Cards\DeckOfJokers;
-use App\Cards\JsonDeck;
 use App\Controller\game\Hand;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,20 +48,11 @@ class GameController extends AbstractController
         $reset = $request->request->get('reset');
         $draw = $request->request->get('draw');
 
-
-        if ($reset || $start) {
-            $session->clear();
-        }
-
+        $this->handleResetInput($reset, $start, $session);
 
         $deck = new Deck();
 
-        if ($session->get('deck') === null) {
-            $deck->createNewDeck();
-            $deck->shuffleDeck();
-        } else {
-            $deck->addToDeck($session->get('deck'));
-        }
+        $this->prepareDeck($session, $deck);
 
         /** @var Hand $dealerHand */
         $dealerHand = $session->get('dealerHand', default: new Hand());
@@ -71,27 +60,11 @@ class GameController extends AbstractController
         $playerHand = $session->get('playerHand', default: new Hand());
 
         if ($draw) {
-            if ($session->get('dealersTurn')) {
-                $dealerHand->addToHand($deck->drawGivenNumOfCards(1));
-            } else {
-                $playerHand->addToHand($deck->drawGivenNumOfCards(1));
-            }
+            $this->handleDrawInput($session, $dealerHand, $deck, $playerHand);
         }
         
         if ($done) {
-            if ($session->get('dealersTurn')) {
-                if ($playerHand->getHandValue() > 21) {
-                    $this->addFlash('info', 'Player is bust, dealer wins!');
-                } elseif ($dealerHand->getHandValue() > 21) {
-                    $this->addFlash('info', 'Dealer is bust, player wins!');
-                }else {
-                    $endGameMessage = $this->getWinnerMessage($playerHand, $dealerHand);
-                    $this->addFlash('info', $endGameMessage);
-                }
-            } else {
-                $session->set('dealersTurn', true);
-                $this->addFlash('info', 'Player is done, dealers turn');
-            }
+            $this->handleDoneInput($playerHand, $session, $dealerHand);
         }
 
         $hands['player'] = $playerHand;
@@ -102,8 +75,12 @@ class GameController extends AbstractController
             'players' => $players,
             'numOfCards' => $numOfCards,
             'hands' => $hands,
-            'playerHandValue' => $playerHand->getHandValue(),
-            'dealerHandValue' => $dealerHand->getHandValue(),
+            'playerHasAces' => $playerHand->handContainsAce(),
+            'dealerHasAces' => $dealerHand->handContainsAce(),
+            'playerHandValueAceAs14' => $playerHand->getHandValue(),
+            'playerHandValueAceAs1' => $playerHand->getHandValue(true),
+            'dealerHandValueAceAs14' => $dealerHand->getHandValue(),
+            'dealerHandValueAceAs1' => $dealerHand->getHandValue(true),
         ];
 
         $session->set('playerHand', $playerHand);
@@ -129,18 +106,105 @@ class GameController extends AbstractController
         );
     }
 
+    /**
+     * @param Hand $playerHand
+     * @param Hand $dealerHand
+     * @return string
+     */
     private function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
     {
-        $playerHandValue = $playerHand->getHandValue();
-        $dealerHandValue = $dealerHand->getHandValue();
+        $playerHandPoints[] = $playerHand->getHandValue();
+        $dealerHandPoints[] = $dealerHand->getHandValue();
 
-        if (($playerHandValue <= 21 &&
-            $playerHandValue > $dealerHandValue)) {
-            $winner = 'Player';
-        } else {
-            $winner = 'Dealer';
+
+        if ($playerHand->handContainsAce()) {
+            $playerHandPoints[] = $playerHand->getHandValue() - 13;
         }
 
-        return $winner .  " wins!";
+        if ($dealerHand->handContainsAce()) {
+            $dealerHandPoints[] = $dealerHand->getHandValue() - 13;
+        }
+
+        foreach ($playerHandPoints as $playerAceVariant) {
+            foreach ($dealerHandPoints as $dealerAceVariant) {
+                if ($playerAceVariant > $dealerAceVariant) {
+                    return 'Player wins!';
+                }
+            }
+        }
+
+        return 'Dealer wins!';
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param Hand $dealerHand
+     * @param Deck $deck
+     * @param Hand $playerHand
+     * @throws Exception
+     */
+    public function handleDrawInput(SessionInterface $session, Hand $dealerHand, Deck $deck, Hand $playerHand): void
+    {
+        if ($session->get('dealersTurn')) {
+            $dealerHand->addToHand($deck->drawGivenNumOfCards(1));
+        } else {
+            $playerHand->addToHand($deck->drawGivenNumOfCards(1));
+        }
+    }
+
+    /**
+     * @param Hand $playerHand
+     * @param SessionInterface $session
+     * @param Hand $dealerHand
+     */
+    public function handleDoneInput(Hand $playerHand, SessionInterface $session, Hand $dealerHand): void
+    {
+        if (($playerHand->getHandValue() > 21 &&
+                !$playerHand->handContainsAce()) ||
+            ($playerHand->getHandValue() > 21 &&
+                ($playerHand->getHandValue() - 13) > 21)
+        ) {
+            $this->addFlash('info', 'Player is bust, dealer wins!');
+        } else if ($session->get('dealersTurn')) {
+            if (($dealerHand->getHandValue() > 21 &&
+                    !$dealerHand->handContainsAce()) ||
+                ($dealerHand->getHandValue() > 21 &&
+                    ($dealerHand->getHandValue() - 13) > 21)
+            ) {
+                $this->addFlash('info', 'Dealer is bust, player wins!');
+            } else {
+                $endGameMessage = $this->getWinnerMessage($playerHand, $dealerHand);
+                $this->addFlash('info', $endGameMessage);
+            }
+        } else {
+            $session->set('dealersTurn', true);
+            $this->addFlash('info', 'Player is done, dealers turn');
+        }
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param Deck $deck
+     */
+    public function prepareDeck(SessionInterface $session, Deck $deck): void
+    {
+        if ($session->get('deck') === null) {
+            $deck->createNewDeck();
+            $deck->shuffleDeck();
+        } else {
+            $deck->addToDeck($session->get('deck'));
+        }
+    }
+
+    /**
+     * @param float|bool|int|string|null $reset
+     * @param float|bool|int|string|null $start
+     * @param SessionInterface $session
+     */
+    public function handleResetInput(float|bool|int|string|null $reset, float|bool|int|string|null $start, SessionInterface $session): void
+    {
+        if ($reset || $start) {
+            $session->clear();
+        }
     }
 }

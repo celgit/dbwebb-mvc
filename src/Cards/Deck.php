@@ -24,7 +24,6 @@ class Deck
         'Q' => 12,
         'K' => 13,
         'A' => 14,
-//        'A' => [1, 14] //TODO måste hantera båda värdena av Ess.
     ];
 
     /**
@@ -35,7 +34,9 @@ class Deck
         $this->deck = $deck;
     }
 
-
+    /**
+     * @return $this
+     */
     public function createNewDeck(): static
     {
         foreach (self::SUITS as $suit) {
@@ -71,11 +72,17 @@ class Deck
         return $drawnCards;
     }
 
+    /**
+     * @return array
+     */
     public function getDeck(): array
     {
         return $this->deck;
     }
 
+    /**
+     *
+     */
     public function shuffleDeck(): void
     {
         $shuffleDeck = $this->getDeck();
@@ -84,6 +91,9 @@ class Deck
         $this->deck = $shuffleDeck;
     }
 
+    /**
+     * @param array $cards
+     */
     public function addToDeck(array $cards): void
     {
         foreach ($cards as $card) {
@@ -91,6 +101,10 @@ class Deck
         }
     }
 
+    /**
+     * @param string $suite
+     * @return string
+     */
     private function getCorrectColor(string $suite): string
     {
         $redSuits = ['&hearts;', '&diams;'];

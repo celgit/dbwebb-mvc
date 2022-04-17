@@ -6,20 +6,23 @@ declare(strict_types=1);
 namespace App\Controller\game;
 
 use App\Cards\Card;
-use Exception;
+use App\Cards\Deck;
+use JetBrains\PhpStorm\Pure;
 
-class Hand
+class Hand extends Deck
 {
     private array $hand = [];
-    public string $valuePointsColor = 'black';
 
+    /**
+     * @return array
+     */
     public function getHand(): array
     {
         return $this->hand;
     }
 
     /**
-     * @param Card[] $card
+     * @param array $cards
      */
     public function addToHand(array $cards): void
     {
@@ -28,28 +31,37 @@ class Hand
         }
     }
 
-    public function getHandValue(): int
+    /**
+     * @param false $aceAsOne
+     * @return int
+     */
+    #[Pure] public function getHandValue(bool $aceAsOne = false): int
     {
         $value = 0;
 
         /** @var Card $card */
         foreach ($this->hand as $card) {
-            $value += $card->getValuePoint();
+            if ($aceAsOne && $card->getValuePoint() === 14) {
+                ++$value;
+            } else {
+                $value += $card->getValuePoint();
+            }
         }
 
         return $value;
     }
 
-    public function getValuePointsColor(): string
+    /**
+     * @return bool
+     */
+    #[Pure] public function handContainsAce(): bool
     {
-        $value = $this->getHandValue();
-
-        if ($value >= 22) {
-            $this->valuePointsColor = 'red';
-        } elseif ($value >= 17) {
-            $this->valuePointsColor = 'green';
+        /** @var Card $card*/
+        foreach ($this->hand as $card) {
+        if ($card->getValue() === 'A') {
+            return true;
         }
-
-        return $this->valuePointsColor;
+    }
+        return false;
     }
 }
