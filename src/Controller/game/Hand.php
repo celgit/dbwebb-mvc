@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Controller\game;
 
 use App\Cards\Card;
@@ -58,10 +57,10 @@ class Hand extends Deck
     {
         /** @var Card $card*/
         foreach ($this->hand as $card) {
-        if ($card->getValue() === 'A') {
-            return true;
+            if ($card->getValue() === 'A') {
+                return true;
+            }
         }
-    }
         return false;
     }
 }

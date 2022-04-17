@@ -17,16 +17,13 @@ class Card
      * @param string $value
      * @param int $valuePoint
      * @param string $color
-     * @param bool $isAce
      */
     public function __construct(
         string $suite,
         string $value,
         int $valuePoint,
         string $color,
-        bool $isAce
-    )
-    {
+    ) {
         $this->suite = $suite;
         $this->value = $value;
         $this->valuePoint = $valuePoint;
@@ -63,16 +60,5 @@ class Card
     public function getColor(): string
     {
         return $this->color;
-    }
-
-    private function getCorrectColor(string $suite): string
-    {
-        $redSuits = ['&hearts;', '&diams;'];
-
-        if (in_array($suite, $redSuits, true)) {
-            return 'red';
-        }
-
-        return 'black';
     }
 }

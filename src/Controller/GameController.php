@@ -62,7 +62,7 @@ class GameController extends AbstractController
         if ($draw) {
             $this->handleDrawInput($session, $dealerHand, $deck, $playerHand);
         }
-        
+
         if ($done) {
             $this->handleDoneInput($playerHand, $session, $dealerHand);
         }
@@ -159,14 +159,16 @@ class GameController extends AbstractController
      */
     public function handleDoneInput(Hand $playerHand, SessionInterface $session, Hand $dealerHand): void
     {
-        if (($playerHand->getHandValue() > 21 &&
+        if (
+            ($playerHand->getHandValue() > 21 &&
                 !$playerHand->handContainsAce()) ||
             ($playerHand->getHandValue() > 21 &&
                 ($playerHand->getHandValue() - 13) > 21)
         ) {
             $this->addFlash('info', 'Player is bust, dealer wins!');
-        } else if ($session->get('dealersTurn')) {
-            if (($dealerHand->getHandValue() > 21 &&
+        } elseif ($session->get('dealersTurn')) {
+            if (
+                ($dealerHand->getHandValue() > 21 &&
                     !$dealerHand->handContainsAce()) ||
                 ($dealerHand->getHandValue() > 21 &&
                     ($dealerHand->getHandValue() - 13) > 21)
@@ -201,8 +203,11 @@ class GameController extends AbstractController
      * @param float|bool|int|string|null $start
      * @param SessionInterface $session
      */
-    public function handleResetInput(float|bool|int|string|null $reset, float|bool|int|string|null $start, SessionInterface $session): void
-    {
+    public function handleResetInput(
+        float|bool|int|string|null $reset,
+        float|bool|int|string|null $start,
+        SessionInterface $session
+    ): void {
         if ($reset || $start) {
             $session->clear();
         }
