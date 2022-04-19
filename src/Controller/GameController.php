@@ -127,7 +127,7 @@ class GameController extends AbstractController
 
         foreach ($playerHandPoints as $playerAceVariant) {
             foreach ($dealerHandPoints as $dealerAceVariant) {
-                if ($playerAceVariant > $dealerAceVariant) {
+                if (($playerHandPoints < 22) && $playerAceVariant > $dealerAceVariant) {
                     return 'Player wins!';
                 }
             }

@@ -29,17 +29,22 @@ Redovisning
   #### _Vilken är din TIL för detta kmom?_
   *Sessions-hanteringen tror jag att jag lärde mig, men det var riktigt krångligt. Sen lärde jag mig också att en redirekt kan hjälpa i de fall där man vill ta med sig datan in i adressfältet.*
 
-### Kmom03 - Enhetstestning
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
+### Kmom03 - Kortspel 21
+  #### _Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?_
+  *Jag tror absolut att det är användbart. Vi gör något liknande på jobbet när vi ska skapa någon funktion eller större grej (även mindre), att man specar ner vad man vill ha för funktioner och regler för dessa, så man slipper ha dem i huvudet och kan gå tillbaka och checka av på listan etc.*
+  *Jag tror att ett diagram specifikt och lite pseudokod är bra verktyg för att kommunicera med folk som inte är utvecklare eller så tekniska, bara för att förklara vilket flöde och bekräfta att man är på samma spår kring hur det man utvecklar ska bli i slutändan. Sen är det viktigt att det är en levande del,*
+  *dvs att man uppdaterar allteftersom (det gjorde jag förvisso inte här i efterhand, men det berodde på tidsfrist å hur stor uppgiften var.*
+  #### _Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden, dina klasser och applikationen som helhet?_
+  *Jag hade lite ambitiösare planer först, att man skulle färkoda poängen för att visa om man får stanna eller om man är busted men det fungerade inte som jag ville när man skulle tänka på att ess är 1 eller 14, å ville inte fastna i smådetaljer som eg bara är nice-to-have, struntade därför i det.*
+  *Jag valde i slutändan att ha en klass för kontrollern, en klass för deck, en för kort och en för Hand. Funderade på om jag skulle bryta ut mer kod ur kontrollern men tycker ändå att hanteringen av allt kan vara där.*
+  *När jag var klar med koden började jag använda php-storms inbyggda funktion som är att "break out method", även om de metoderna hamnade i controllern tycker jag ändå att de passar bättre där än i de andra klasserna.*
+  *Jag är överlag nöjd med hur det blev, även om det inte, designmässigt, blev någon höjdare.*
+  #### _Vilken är din känsla för att koda i ett ramverk som Symfony, så här långt in i kursen?_
+  *Syomfony verkar trevligt, har inte haft några direkta problem med ramverket som så, det har snarare varit storleken på uppgifterna och hur komplexa de blir i förhållandevis till hur mycket hjälp man fick att komma igång.*
+  *Vet att vi har symfony på sina ställen på jobbet också, men är inte så insatt i exakt var utan bara sett det i förbifarten. Har inga negativa känslor om det.*
+  #### _Vilken är din TIL för detta kmom?_
+  *Det är inte någon specifik sak utan att jag börjar få mer kläm på twig-filer, hur de hanterar saker och ting (och inte hanterar, som argument till funktioner, vad jag kunde finna iaf (sökte bara en stund), men även hur sessionerna fungerar lite närmare.*
+
 
 ### Kmom04 - Autentisering
   #### _FRÅGA_
