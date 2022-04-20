@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\game;
 
 use Exception;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Deck
 {
@@ -114,5 +115,19 @@ class Deck
         }
 
         return 'black';
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param Deck $deck
+     */
+    public function prepareDeck(SessionInterface $session, Deck $deck): void
+    {
+        if ($session->get('deck') === null) {
+            $deck->createNewDeck();
+            $deck->shuffleDeck();
+        } else {
+            $deck->addToDeck($session->get('deck'));
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\game\Deck;
 use App\game\Hand;
 use Exception;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +53,7 @@ class GameController extends AbstractController
 
         $deck = new Deck();
 
-        $this->prepareDeck($session, $deck);
+        $deck->prepareDeck($session, $deck);
 
         /** @var Hand $dealerHand */
         $dealerHand = $session->get('dealerHand', default: new Hand());
@@ -111,7 +112,7 @@ class GameController extends AbstractController
      * @param Hand $dealerHand
      * @return string
      */
-    private function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
+    #[Pure] private function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
     {
         $playerHandPoints[] = $playerHand->getHandValue();
         $dealerHandPoints[] = $dealerHand->getHandValue();
@@ -125,15 +126,19 @@ class GameController extends AbstractController
             $dealerHandPoints[] = $dealerHand->getHandValue() - 13;
         }
 
+        $chosenWinner = '';
+
         foreach ($playerHandPoints as $playerAceVariant) {
             foreach ($dealerHandPoints as $dealerAceVariant) {
-                if (($playerHandPoints < 22) && $playerAceVariant > $dealerAceVariant) {
-                    return 'Player wins!';
+                if ($this->playerWins($playerAceVariant, $dealerAceVariant)) {
+                    $chosenWinner = 'Player';
+                } else {
+                    $chosenWinner = 'Dealer';
                 }
             }
         }
 
-        return 'Dealer wins!';
+        return $chosenWinner . ' wins!';
     }
 
     /**
@@ -159,20 +164,10 @@ class GameController extends AbstractController
      */
     public function handleDoneInput(Hand $playerHand, SessionInterface $session, Hand $dealerHand): void
     {
-        if (
-            ($playerHand->getHandValue() > 21 &&
-                !$playerHand->handContainsAce()) ||
-            ($playerHand->getHandValue() > 21 &&
-                ($playerHand->getHandValue() - 13) > 21)
-        ) {
+        if ($this->handIsBust($playerHand)) {
             $this->addFlash('info', 'Player is bust, dealer wins!');
         } elseif ($session->get('dealersTurn')) {
-            if (
-                ($dealerHand->getHandValue() > 21 &&
-                    !$dealerHand->handContainsAce()) ||
-                ($dealerHand->getHandValue() > 21 &&
-                    ($dealerHand->getHandValue() - 13) > 21)
-            ) {
+            if ($this->handIsBust($dealerHand)) {
                 $this->addFlash('info', 'Dealer is bust, player wins!');
             } else {
                 $endGameMessage = $this->getWinnerMessage($playerHand, $dealerHand);
@@ -181,20 +176,6 @@ class GameController extends AbstractController
         } else {
             $session->set('dealersTurn', true);
             $this->addFlash('info', 'Player is done, dealers turn');
-        }
-    }
-
-    /**
-     * @param SessionInterface $session
-     * @param Deck $deck
-     */
-    public function prepareDeck(SessionInterface $session, Deck $deck): void
-    {
-        if ($session->get('deck') === null) {
-            $deck->createNewDeck();
-            $deck->shuffleDeck();
-        } else {
-            $deck->addToDeck($session->get('deck'));
         }
     }
 
@@ -211,5 +192,27 @@ class GameController extends AbstractController
         if ($reset || $start) {
             $session->clear();
         }
+    }
+
+    /**
+     * @param Hand $hand
+     * @return bool
+     */
+    #[Pure] private function handIsBust(Hand $hand): bool
+    {
+        return ($hand->getHandValue() > 21 &&
+                !$hand->handContainsAce()) ||
+            ($hand->getHandValue() > 21 &&
+                ($hand->getHandValue() - 13) > 21);
+    }
+
+    /**
+     * @param mixed $playerAceVariant
+     * @param mixed $dealerAceVariant
+     * @return bool
+     */
+    private function playerWins(mixed $playerAceVariant, mixed $dealerAceVariant): bool
+    {
+        return ($playerAceVariant < 22 && $dealerAceVariant < 22) && $playerAceVariant > $dealerAceVariant;
     }
 }
