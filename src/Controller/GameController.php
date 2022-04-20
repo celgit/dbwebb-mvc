@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Cards\Deck;
-use App\Controller\game\Hand;
+use App\game\Deck;
+use App\game\Hand;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -92,7 +92,7 @@ class GameController extends AbstractController
 
     /**
      * @Route(
-     *     "/card/deck/dealings",
+     *     "/game/deck/dealings",
      *     name="start-game-redirect",
      *     methods={"POST"})
      * @throws \Exception

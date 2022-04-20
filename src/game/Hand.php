@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\game;
+namespace App\game;
 
-use App\Cards\Card;
-use App\Cards\Deck;
 use JetBrains\PhpStorm\Pure;
 
 class Hand extends Deck

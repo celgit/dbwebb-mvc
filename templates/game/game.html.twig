@@ -17,14 +17,18 @@
             <h3>Player-hand:</h3>
             <p>
                 {% if hands['player'] is not empty %}
-                    {% for card in hands['player'].getHand %}
-                        <div class="card {{ card.getColor() }}">
-                            {{ card.getValue() }}
-                            <span class="symbol">
-                                {{ card.getSuite()|raw }}
-                            </span>
-                        </div>
-                    {% endfor %}
+                    <div class="cardContainer">
+                        {% for card in hands['player'].getHand %}
+                            <div class="card {{ card.getColor() }}">
+                                <span class="cardValue">
+                                    {{ card.getValue() }}
+                                </span>
+                                <span class="symbol">
+                                    {{ card.getSuite()|raw }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </p>
                 <p> Value of hand (Ace = 14p / Ace = 1p):</p>

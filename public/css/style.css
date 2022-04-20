@@ -88,12 +88,21 @@ legend {
   margin-left: 47%;
 }
 
+.cardContainer {
+  display: flex;
+  grid-gap: 5px;
+}
+
 .card {
   width: 50px;
   height: 90px;
   border: 1px solid black;
-  display: inline-block;
+  display: flex;
   margin-bottom: 3px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .red {
@@ -110,5 +119,11 @@ legend {
 
 .symbol {
   font-size: 50px;
-  margin-left: 5px;
+  margin-top: 3px;
+}
+
+.cardValue {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
