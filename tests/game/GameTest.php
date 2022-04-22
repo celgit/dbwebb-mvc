@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class GameTest extends TestCase
 {
-
+    /**
+     * @return void
+     */
     public function testHandleResetInput(): void
     {
         $game = new Game();
@@ -27,6 +29,7 @@ class GameTest extends TestCase
 
     /**
      * @throws Exception
+     * @return void
      */
     public function testHandleDrawInput(): void
     {
@@ -45,6 +48,9 @@ class GameTest extends TestCase
         $this->dealerDrawsOneCard($session, $game, $dealerHand, $deck, $playerHand);
     }
 
+    /**
+     * @return void
+     */
     public function testHandleDoneInput(): void
     {
         $game = new Game();
@@ -65,6 +71,9 @@ class GameTest extends TestCase
         $this->playersTurnIsDone($session, $game, $playerHand);
     }
 
+    /**
+     * @return void
+     */
     public function testGetWinnerMessage(): void
     {
         $game = new Game();

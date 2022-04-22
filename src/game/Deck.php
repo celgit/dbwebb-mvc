@@ -36,7 +36,7 @@ class Deck
     }
 
     /**
-     * @return $this
+     * @return void
      */
     public function createNewDeck(): void
     {
@@ -80,7 +80,7 @@ class Deck
     }
 
     /**
-     *
+     * @return void
      */
     public function shuffleDeck(): void
     {
@@ -117,7 +117,6 @@ class Deck
 
     /**
      * @param SessionInterface $session
-     * @param Deck $deck
      * @return void
      */
     public function prepareDeck(SessionInterface $session): void
