@@ -19,7 +19,7 @@
                 {% if hands['player'] is not empty %}
                     <div class="cardContainer">
                         {% for card in hands['player'].getHand %}
-                            <div class="card {{ card.getColor() }}">
+                            <div class="gameCard {{ card.getColor() }}">
                                 <span class="cardValue">
                                     {{ card.getValue() }}
                                 </span>
@@ -43,7 +43,7 @@
             {% if hands['dealer'] is not empty %}
                 <div class="cardContainer">
                     {% for card in hands['dealer'].getHand %}
-                        <div class="card {{ card.getColor() }}">
+                        <div class="gameCard {{ card.getColor() }}">
                                         <span class="cardValue">
                                             {{ card.getValue() }}
                                         </span>

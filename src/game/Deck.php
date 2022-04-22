@@ -38,7 +38,7 @@ class Deck
     /**
      * @return $this
      */
-    public function createNewDeck(): static
+    public function createNewDeck(): void
     {
         foreach (self::SUITS as $suit) {
             $color = $this->getCorrectColor($suit);
@@ -48,8 +48,6 @@ class Deck
                 $this->deck[] = $card;
             }
         }
-
-        return $this;
     }
 
     /**
@@ -106,7 +104,7 @@ class Deck
      * @param string $suite
      * @return string
      */
-    private function getCorrectColor(string $suite): string
+    public function getCorrectColor(string $suite): string
     {
         $redSuits = ['&hearts;', '&diams;'];
 
@@ -120,14 +118,15 @@ class Deck
     /**
      * @param SessionInterface $session
      * @param Deck $deck
+     * @return void
      */
-    public function prepareDeck(SessionInterface $session, Deck $deck): void
+    public function prepareDeck(SessionInterface $session): void
     {
         if ($session->get('deck') === null) {
-            $deck->createNewDeck();
-            $deck->shuffleDeck();
+            $this->createNewDeck();
+            $this->shuffleDeck();
         } else {
-            $deck->addToDeck($session->get('deck'));
+            $this->addToDeck($session->get('deck'));
         }
     }
 }

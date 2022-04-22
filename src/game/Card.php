@@ -10,7 +10,6 @@ class Card
     public string $value;
     public int $valuePoint;
     public string $color;
-    public bool $isAce = false;
 
     /**
      * @param string $suite

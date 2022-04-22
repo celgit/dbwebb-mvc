@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\game\Deck;
+use App\game\Game;
 use App\game\Hand;
 use Exception;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,16 +44,18 @@ class GameController extends AbstractController
         int $players = 1,
         int $numOfCards = 0
     ): Response {
+        $game = new Game();
+
         $start = $request->request->get('start');
         $done = $request->request->get('done');
         $reset = $request->request->get('reset');
         $draw = $request->request->get('draw');
 
-        $this->handleResetInput($reset, $start, $session);
+        $game->handleResetInput($reset, $start, $session);
 
         $deck = new Deck();
 
-        $deck->prepareDeck($session, $deck);
+        $deck->prepareDeck($session);
 
         /** @var Hand $dealerHand */
         $dealerHand = $session->get('dealerHand', default: new Hand());
@@ -61,11 +63,11 @@ class GameController extends AbstractController
         $playerHand = $session->get('playerHand', default: new Hand());
 
         if ($draw) {
-            $this->handleDrawInput($session, $dealerHand, $deck, $playerHand);
+            $game->handleDrawInput($session, $dealerHand, $deck, $playerHand);
         }
 
         if ($done) {
-            $this->handleDoneInput($playerHand, $session, $dealerHand);
+            $this->addFlash('info', $game->handleDoneInput($playerHand, $session, $dealerHand));
         }
 
         $hands['player'] = $playerHand;
@@ -96,7 +98,7 @@ class GameController extends AbstractController
      *     "/game/deck/dealings",
      *     name="start-game-redirect",
      *     methods={"POST"})
-     * @throws \Exception
+     * @throws Exception
      */
     public function startGameRedirect(Request $request): RedirectResponse
     {
@@ -105,114 +107,5 @@ class GameController extends AbstractController
             ['players' => $request->request->get('players'),
                 'numOfCards' => $request->request->get('numOfCards')]
         );
-    }
-
-    /**
-     * @param Hand $playerHand
-     * @param Hand $dealerHand
-     * @return string
-     */
-    #[Pure] private function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
-    {
-        $playerHandPoints[] = $playerHand->getHandValue();
-        $dealerHandPoints[] = $dealerHand->getHandValue();
-
-
-        if ($playerHand->handContainsAce()) {
-            $playerHandPoints[] = $playerHand->getHandValue() - 13;
-        }
-
-        if ($dealerHand->handContainsAce()) {
-            $dealerHandPoints[] = $dealerHand->getHandValue() - 13;
-        }
-
-        $chosenWinner = '';
-
-        foreach ($playerHandPoints as $playerAceVariant) {
-            foreach ($dealerHandPoints as $dealerAceVariant) {
-                if ($this->playerWins($playerAceVariant, $dealerAceVariant)) {
-                    $chosenWinner = 'Player';
-                } else {
-                    $chosenWinner = 'Dealer';
-                }
-            }
-        }
-
-        return $chosenWinner . ' wins!';
-    }
-
-    /**
-     * @param SessionInterface $session
-     * @param Hand $dealerHand
-     * @param Deck $deck
-     * @param Hand $playerHand
-     * @throws Exception
-     */
-    public function handleDrawInput(SessionInterface $session, Hand $dealerHand, Deck $deck, Hand $playerHand): void
-    {
-        if ($session->get('dealersTurn')) {
-            $dealerHand->addToHand($deck->drawGivenNumOfCards(1));
-        } else {
-            $playerHand->addToHand($deck->drawGivenNumOfCards(1));
-        }
-    }
-
-    /**
-     * @param Hand $playerHand
-     * @param SessionInterface $session
-     * @param Hand $dealerHand
-     */
-    public function handleDoneInput(Hand $playerHand, SessionInterface $session, Hand $dealerHand): void
-    {
-        if ($this->handIsBust($playerHand)) {
-            $this->addFlash('info', 'Player is bust, dealer wins!');
-        } elseif ($session->get('dealersTurn')) {
-            if ($this->handIsBust($dealerHand)) {
-                $this->addFlash('info', 'Dealer is bust, player wins!');
-            } else {
-                $endGameMessage = $this->getWinnerMessage($playerHand, $dealerHand);
-                $this->addFlash('info', $endGameMessage);
-            }
-        } else {
-            $session->set('dealersTurn', true);
-            $this->addFlash('info', 'Player is done, dealers turn');
-        }
-    }
-
-    /**
-     * @param float|bool|int|string|null $reset
-     * @param float|bool|int|string|null $start
-     * @param SessionInterface $session
-     */
-    public function handleResetInput(
-        float|bool|int|string|null $reset,
-        float|bool|int|string|null $start,
-        SessionInterface $session
-    ): void {
-        if ($reset || $start) {
-            $session->clear();
-        }
-    }
-
-    /**
-     * @param Hand $hand
-     * @return bool
-     */
-    #[Pure] private function handIsBust(Hand $hand): bool
-    {
-        return ($hand->getHandValue() > 21 &&
-                !$hand->handContainsAce()) ||
-            ($hand->getHandValue() > 21 &&
-                ($hand->getHandValue() - 13) > 21);
-    }
-
-    /**
-     * @param mixed $playerAceVariant
-     * @param mixed $dealerAceVariant
-     * @return bool
-     */
-    private function playerWins(mixed $playerAceVariant, mixed $dealerAceVariant): bool
-    {
-        return ($playerAceVariant < 22 && $dealerAceVariant < 22) && $playerAceVariant > $dealerAceVariant;
     }
 }
