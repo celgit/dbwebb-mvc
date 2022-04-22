@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-
 namespace App\game;
 
 use Exception;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Game
@@ -38,8 +36,7 @@ class Game
         Hand $dealerHand,
         Deck $deck,
         Hand $playerHand
-    ): void
-    {
+    ): void {
         if ($session->get('dealersTurn')) {
             $dealerHand->addToHand($deck->drawGivenNumOfCards(1));
         } else {
@@ -75,7 +72,7 @@ class Game
      * @param Hand $hand
      * @return bool
      */
-    #[Pure] private function handIsBust(Hand $hand): bool
+    private function handIsBust(Hand $hand): bool
     {
         return ($hand->getHandValue() > 21 &&
                 !$hand->handContainsAce()) ||
@@ -88,7 +85,7 @@ class Game
      * @param Hand $dealerHand
      * @return string
      */
-    #[Pure] public function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
+    public function getWinnerMessage(Hand $playerHand, Hand $dealerHand): string
     {
         $playerHandValue = $playerHand->getHandValue();
         $dealerHandValue = $dealerHand->getHandValue();

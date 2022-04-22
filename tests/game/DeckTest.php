@@ -1,6 +1,7 @@
 <?php
 
 namespace App\game;
+
 namespace App\game\Card;
 
 use App\game\Card;
@@ -96,7 +97,6 @@ class DeckTest extends TestCase
         self::assertSame('black', $deck->getCorrectColor('&spades;'));
         self::assertSame('black', $deck->getCorrectColor('&clubs;'));
         self::assertSame('black', $deck->getCorrectColor('notReallyAProperSuite'));
-
     }
 
     /**

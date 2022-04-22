@@ -32,5 +32,4 @@ class CardTest extends TestCase
     {
         self::assertSame('red', $this->card->getColor());
     }
-
 }

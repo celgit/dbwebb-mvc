@@ -58,6 +58,5 @@ class HandTest extends TestCase
 
         $handWithOutAce->addToHand($cards);
         self::assertFalse($handWithOutAce->handContainsAce());
-
     }
 }

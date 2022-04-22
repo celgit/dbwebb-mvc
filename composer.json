@@ -91,7 +91,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
+        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php fix src tests",
         "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
         "phpcbf": "tools/php-codesniffer/vendor/bin/phpcbf --standard=PSR12 src",
         "phpmd": "tools/phpmd/vendor/bin/phpmd src text .phpmd.xml || true",
@@ -102,7 +102,8 @@
             "@phpmd",
             "@phpstan"
         ],
-        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "phpdoc": "tools/phpdoc/phpdoc -d ./src -t ./docs/api"
     },
     "conflict": {
         "symfony/symfony": "*"

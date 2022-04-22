@@ -309,5 +309,4 @@ class GameTest extends TestCase
         $dealerHand->addToHand($cardsWorth6or19Points);
         self::assertSame($dealerWinsMessage, $game->getWinnerMessage($playerHand, $dealerHand));
     }
-
 }

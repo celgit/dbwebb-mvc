@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\game;
 
-use JetBrains\PhpStorm\Pure;
-
 class Hand extends Deck
 {
     private array $hand = [];
@@ -32,7 +30,7 @@ class Hand extends Deck
      * @param false $aceAsOne
      * @return int
      */
-    #[Pure] public function getHandValue(bool $aceAsOne = false): int
+    public function getHandValue(bool $aceAsOne = false): int
     {
         $value = 0;
 
@@ -51,7 +49,7 @@ class Hand extends Deck
     /**
      * @return bool
      */
-    #[Pure] public function handContainsAce(): bool
+    public function handContainsAce(): bool
     {
         /** @var Card $card*/
         foreach ($this->hand as $card) {
