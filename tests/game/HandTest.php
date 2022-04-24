@@ -59,4 +59,21 @@ class HandTest extends TestCase
         $handWithOutAce->addToHand($cards);
         self::assertFalse($handWithOutAce->handContainsAce());
     }
+
+    public function testGetHandValueWithAces(): void
+    {
+        $handWithAces = new Hand();
+        $game = new Game();
+
+        $cards = [
+            new Card('hearts', '4', 4, 'red'),
+            new Card('diamonds', 'Q', 12, 'black'),
+            new Card('clubs', 'A', 14, 'black'),
+            new Card('spades', 'A', 14, 'black')
+        ];
+
+        $handWithAces->addToHand($cards);
+
+        self::assertSame(18, $handWithAces->getHandValueWithAces($game));
+    }
 }

@@ -59,4 +59,34 @@ class Hand extends Deck
         }
         return false;
     }
+
+    public function getHandValueWithAces(Game $game): int
+    {
+        $value = $this->getHandValue();
+
+        $numberOfAces = $this->getNumberOfAces();
+
+        for ($i = 0; $i < $numberOfAces; $i++) {
+            if ($value > $game::MAX_HAND_VALUE) {
+                $value -= 13;
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @return int
+     */
+    private function getNumberOfAces(): int
+    {
+        $numberOfAces = 0;
+
+        foreach ($this->hand as $card) {
+            if ($card->getValue() === 'A') {
+                $numberOfAces++;
+            }
+        }
+        return $numberOfAces;
+    }
 }

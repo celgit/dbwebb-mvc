@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Game
 {
+    public CONST MAX_HAND_VALUE = 21;
+
     /**
      * @param float|bool|int|string|null $reset
      * @param float|bool|int|string|null $start
@@ -74,10 +76,10 @@ class Game
      */
     private function handIsBust(Hand $hand): bool
     {
-        return ($hand->getHandValue() > 21 &&
+        return ($hand->getHandValue() > self::MAX_HAND_VALUE &&
                 !$hand->handContainsAce()) ||
-            ($hand->getHandValue() > 21 &&
-                ($hand->getHandValue() - 13) > 21);
+            ($hand->getHandValue() > self::MAX_HAND_VALUE &&
+                ($hand->getHandValueWithAces($this)) > self::MAX_HAND_VALUE );
     }
 
     /**
@@ -90,12 +92,12 @@ class Game
         $playerHandValue = $playerHand->getHandValue();
         $dealerHandValue = $dealerHand->getHandValue();
 
-        if ($playerHandValue > 21 && $playerHand->handContainsAce()) {
-            $playerHandValue = $playerHand->getHandValue() - 13;
+        if ($playerHandValue > self::MAX_HAND_VALUE && $playerHand->handContainsAce()) {
+            $playerHandValue = $playerHand->getHandValueWithAces($this);
         }
 
-        if ($dealerHandValue > 21 && $dealerHand->handContainsAce()) {
-            $dealerHandValue = $dealerHand->getHandValue() - 13;
+        if ($dealerHandValue > self::MAX_HAND_VALUE && $dealerHand->handContainsAce()) {
+            $dealerHandValue = $dealerHand->getHandValueWithAces($this);
         }
 
         if ($playerHandValue > $dealerHandValue) {
