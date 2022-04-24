@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650644389">
-  <project timestamp="1650644389">
+<coverage generated="1650762693">
+  <project timestamp="1650762693">
     <file name="/Users/cel/Code/dbwebb-kurser/mvc/me/report/src/Cards/Card.php">
       <class name="App\Cards\Card" namespace="global">
         <metrics complexity="5" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="13" coveredelements="0"/>
@@ -517,8 +517,8 @@
       <line num="52" type="method" name="handContainsAce" visibility="public" complexity="3" crap="3" count="3"/>
       <line num="55" type="stmt" count="3"/>
       <line num="56" type="stmt" count="3"/>
-      <line num="57" type="stmt" count="2"/>
-      <line num="60" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="3"/>
+      <line num="60" type="stmt" count="1"/>
       <metrics loc="63" ncloc="48" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="17" coveredelements="17"/>
     </file>
     <metrics files="21" loc="1395" ncloc="1124" classes="20" methods="76" coveredmethods="22" conditionals="0" coveredconditionals="0" statements="318" coveredstatements="77" elements="394" coveredelements="99"/>

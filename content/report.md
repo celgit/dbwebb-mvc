@@ -46,17 +46,22 @@ Redovisning
   *Det är inte någon specifik sak utan att jag börjar få mer kläm på twig-filer, hur de hanterar saker och ting (och inte hanterar, som argument till funktioner, vad jag kunde finna iaf (sökte bara en stund), men även hur sessionerna fungerar lite närmare.*
 
 
-### Kmom04 - Autentisering
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
+### Kmom04 - Unittestande
+  #### _Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt._
+  *Jag gillar det skarpt. När jag skrev koden saknade jag testerna då jag skriver mycket tester i mitt jobb. Var speciellt svårt att testa de olika vinnar-utfallen manuellt, när man t.ex. ville specifikt ha ett ess och fick fortsätta tills man fick det, var ju otroligt mycket enklare med tester, vilket jag kände på mig, men ville vänta tills vi fick hjälp med uppsättningen i just vår miljö.*
+  *Är redigt imponerad av täckningsrapporten, den hjälper ju även till att visa vilka scenarios man ev. missat, mycket bra verktyg, ska visa folk det på jobbet tänkte jag.*
+  #### _Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90% kodtäckning?_
+  *Jag har 4 klasser + kontrollern, skippade kontrollern men har 100% täckning på huvudklasserna, är riktigt nöjd med det.*
+  #### _Upplever du din egen kod som “testbar kod” eller finns det delar i koden som är mer eller mindre testbar och finns det saker som kan göras för att förbättra kodens testbarhet?_
+  *Då jag, som jag nämnde ovan, skriver en del tester på jobbet har jag alltid tester i åtanke när jag skapar metoder, jag tänker alltid att det jag skriver ska gå testa. Nu började jag ju förvisso med en stor kontroller som var omöjlig att testa men det var enkelt att bryta ut det som skulle bli game-klassen när jag hade ett fungerande koncept.*
+  *Card-, deck- och hand-klasserna var oerhört lätta att testa då jag hållt metoderna väldigt simpla i dem och försökte hålla metoderna till enfunktionella så att säga.*
+  #### _Valde du att skriva om delar av din kod för att förbättra den eller göra den mer testbar, om så berätta lite hur du tänkte._
+  *Ja, jag skapade en game-klass av stora delar av kontrollern för att kunna testa det. T.ex. hur man tog fram vinnaren ville jag verkligen testa då det var ett helvete att göra manuellt. Visste även att jag hade en bugg där. När jag skrivit testet failade det men jag visste att det skulle gå genom eg, så jag kikade på metoden, fixade den, fick grönt test å gick vidare till nästa scenario, då faila det, då insåg jag att jag fick skriva om metoden helt vilket rensade bort en hel del rader och komplexitet, blev riktigt bra tillslut!*
+  *För att göra kod testbar ska man anta att man blir dement när man stänger ner datorn och behöver läsa på vad metoderna gör igen, på så vis tvingas man skriva små och enkla metoder och därmed även testbar kod. Det är iaf så jag tänker.*
+  #### _Fundera över om du anser att testbar kod är något som kan identifiera “snygg och ren kod”._
+  *Ja, definitivt, det hjälper till att hålla metoderna små och lätta att arbeta med. Det är dock inte allt som gör det, man måste även namnge sakerna på ett läsbart och logiskt sätt, för en person som inte nödvändigtvis är utvecklare själv.*
+  #### _Vilken är din TIL för detta kmom?_
+  *Att man kan få fram en täckningsrapport med phpunit, det var riktigt användbart!*
 
 ### Kmom05 - ORM/Databas
   #### _FRÅGA_

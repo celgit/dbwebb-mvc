@@ -60,8 +60,9 @@ class GameTest extends TestCase
 
         $cards = [
             new Card('hearts', '4', 4, 'red'),
-            new Card('diamonds', 'Q', 12, 'black'),
-            new Card('clubs', '10', 10, 'black')
+            new Card('diamonds', '9', 9, 'black'),
+            new Card('clubs', 'A', 14, 'black'),
+            new Card('clubs', 'K', 13, 'black'),
         ];
 
         $this->playerIsBust($playerHand, $cards, $game, $session, $dealerHand);
@@ -111,6 +112,13 @@ class GameTest extends TestCase
         $this->dealerWinsWithAceAs14(
             $cardsWorth13Points,
             $cardsWorth6or19Points,
+            $dealerWinsMessage,
+            $game
+        );
+
+        $this->dealerWinsWithAceAs1(
+            $cardsWorth13Points,
+            $cardsWorth16or29Points,
             $dealerWinsMessage,
             $game
         );
@@ -266,16 +274,15 @@ class GameTest extends TestCase
      * @param array $cardsWorth6or19Points
      * @param string $dealerWinsMessage
      * @param Game $game
-     * @return Hand[]
+     * @return void
      */
-    private function dealerWinsWithAceAs14(array $cardsWorth13Points, array $cardsWorth6or19Points, string $dealerWinsMessage, Game $game): array
+    private function dealerWinsWithAceAs14(array $cardsWorth13Points, array $cardsWorth6or19Points, string $dealerWinsMessage, Game $game): void
     {
         $dealerHand = new Hand();
         $playerHand = new Hand();
         $playerHand->addToHand($cardsWorth13Points);
         $dealerHand->addToHand($cardsWorth6or19Points);
         self::assertSame($dealerWinsMessage, $game->getWinnerMessage($playerHand, $dealerHand));
-        return array($dealerHand, $playerHand);
     }
 
     /**
@@ -283,16 +290,15 @@ class GameTest extends TestCase
      * @param array $cardsWorth16or29Points
      * @param string $playerWinsMessage
      * @param Game $game
-     * @return Hand[]
+     * @return void
      */
-    private function playerWinsWithAceAs1WhenDealerAlsoHasAnAce(array $cardsWorth6or19Points, array $cardsWorth16or29Points, string $playerWinsMessage, Game $game): array
+    private function playerWinsWithAceAs1WhenDealerAlsoHasAnAce(array $cardsWorth6or19Points, array $cardsWorth16or29Points, string $playerWinsMessage, Game $game): void
     {
         $dealerHand = new Hand();
         $playerHand = new Hand();
         $playerHand->addToHand($cardsWorth6or19Points);
         $dealerHand->addToHand($cardsWorth16or29Points);
         self::assertSame($playerWinsMessage, $game->getWinnerMessage($playerHand, $dealerHand));
-        return array($dealerHand, $playerHand);
     }
 
     /**
@@ -307,6 +313,15 @@ class GameTest extends TestCase
         $playerHand = new Hand();
         $playerHand->addToHand($cardsWorth16or29Points);
         $dealerHand->addToHand($cardsWorth6or19Points);
+        self::assertSame($dealerWinsMessage, $game->getWinnerMessage($playerHand, $dealerHand));
+    }
+
+    private function dealerWinsWithAceAs1(array $cardsWorth13Points, array $cardsWorth16or29Points, string $dealerWinsMessage, Game $game): void
+    {
+        $dealerHand = new Hand();
+        $playerHand = new Hand();
+        $playerHand->addToHand($cardsWorth13Points);
+        $dealerHand->addToHand($cardsWorth16or29Points);
         self::assertSame($dealerWinsMessage, $game->getWinnerMessage($playerHand, $dealerHand));
     }
 }
