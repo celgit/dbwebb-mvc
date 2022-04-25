@@ -103,7 +103,7 @@
             "@phpstan"
         ],
         "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
-        "phpdoc": "tools/phpdoc/phpdoc -d ./src -t ./docs/api"
+        "phpdoc": "tools/phpdoc/phpdoc"
     },
     "conflict": {
         "symfony/symfony": "*"

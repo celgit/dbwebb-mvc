@@ -556,6 +556,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-game-Game.html#method_getWinnerMessage"
         },                {
+            "fqsen": "\\App\\game\\Game\u003A\u003AMAX_HAND_VALUE",
+            "name": "MAX_HAND_VALUE",
+            "summary": "",
+            "url": "classes/App-game-Game.html#constant_MAX_HAND_VALUE"
+        },                {
             "fqsen": "\\App\\game\\Hand",
             "name": "Hand",
             "summary": "",
@@ -580,6 +585,16 @@ Search.appendIndex(
             "name": "handContainsAce",
             "summary": "",
             "url": "classes/App-game-Hand.html#method_handContainsAce"
+        },                {
+            "fqsen": "\\App\\game\\Hand\u003A\u003AgetHandValueWithAces\u0028\u0029",
+            "name": "getHandValueWithAces",
+            "summary": "",
+            "url": "classes/App-game-Hand.html#method_getHandValueWithAces"
+        },                {
+            "fqsen": "\\App\\game\\Hand\u003A\u003AgetNumberOfAces\u0028\u0029",
+            "name": "getNumberOfAces",
+            "summary": "",
+            "url": "classes/App-game-Hand.html#method_getNumberOfAces"
         },                {
             "fqsen": "\\App\\game\\Hand\u003A\u003A\u0024hand",
             "name": "hand",
