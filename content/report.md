@@ -64,16 +64,22 @@ Redovisning
   *Att man kan få fram en täckningsrapport med phpunit, det var riktigt användbart!*
 
 ### Kmom05 - ORM/Databas
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
+  #### _Gick det bra att jobba igenom övningen med Symfony och Doctrine. Något särskilt du tänkte/reagerade på under övningen?_
+  *Det gick sådär i början. Började nämligen med mariadb iom att vi haft det i tidigare kurser och övningen fungerade inte, den saknade entity-biten, så det gick inte följa den. När jag sen växlade över till sqlite fungerade det, å noterade direkt vad som saknats i den andra. Kan dock tycka att sqlite i detta fallet duger gott.*
+  *Utöver det gick det fint. Hade lite problem med updatering av boken, id:t klagades det på hela tiden, trots att det skickades med, tills jag satte den inputen i formuläret till "hidden", ingen aning om varför det skulle få det fungera men det gjorde det (#haxx0r).*
+  #### _Berätta om din applikation och hur du tänkte när du byggde upp den. Tänkte du något speciellt på användargränssnittet? Gick det bra att jobba med ORM i CRUD eller vad anser du om det?_
+  *Jag utgick från övningens metoder, när jag lade in dem i report-projektet valde jag ist att ändra begreppet "product" till book och sen såg jag till att alla fungerade som det skulle.*
+  *Därefter var det bara att skapa twigs, fylla på dem med data och börja pussla. Det gick fint att använda kunskap och lösningar från tidigare moment vilket gjorde arbetet, när jag väl kom över problemen jag hade med övningen ovan, flöt på väldigt bra.*
+  *Först gjorde jag en sida med länkar till de olika funktionerna men kom snabbt på att det inte är så en sida bör fungera. Förstod inte heller först varför ni ville ha en tabell med böckerna men det myntet föll ner tillslut. Innan jag skapade detalj-sidorna om varje bok hade jag all info på "alla böcker"-sidan, sen var det bara att flytta in det till undersidor jag länkade till ist.*
+  *Därefter snyggade jag till det med knappar och liknande för de olika funktionerna. Tänkte först ha dem inne på varje bokdetaljssida men det blev bättre i översikten. Höll det simpelt.*
+  #### _Berätta om du gjorde (delar av) extrauppgiften med användare och login._
+  *Valde att inte göra den nu, men kommer snegla på den efter kursen är slut då jag har ett projekt där jag vill använda mig av den funktionaliteten.*
+  #### _Vad är din uppfattning om ORM så här långt och relatera gärna till andra sätt att jobba med applikationskod mot databaser?_
+  *Jag kan se fördelen i organisationer där utvecklarna inte kan sql och man vill ha de två språktyperna isär, men utöver det föredrar jag att ha det som vi har det på jobbet, sql:en direkt i koden, man har mycekt mer kontroll då..*
+  *Vi kör dock med datamappers etc för att segrera funktionaliteten och hålla isär saker å ting.*
+  *Det var dock oerhört smidigt att den skapade alla filer för sidan, twigs, kontroller, klasser etc, riktigt smutt, det gillade jag skarpt! Det kommer jag def använda i mitt sidoprojekt sen :)*
+  #### _Vilken är din TIL för detta kmom?_
+  *Hur doctrine fungerar i den bemärkelsen att den kan skapa mycket av koden automatiskt, mycket av den vanliga koden som ändå alltid är på ett visst sätt, som grunden i kontrollern, klasserna med setters å getters etc. Mycket smidigt! Man får ju även start på routen å liknande.*
 
 ### Kmom06 - Automatiserad test
   #### _FRÅGA_
