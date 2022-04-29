@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register book!{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>Register book</legend>
+        <form method="POST" action="{{ path("register_book") }}">
+            <p><Label>Enter book details:</Label><br>
+                <label>Title: </label><input type="text" name="title" value=""><br>
+                <br>
+                <label>ISBN: </label><input type="text" name="isbn" value=""><br>
+                <br>
+                <label>Author: </label><input type="text" name="author" value=""><br>
+                <br>
+                <label>Image url: </label><input type="text" name="image_url" value=""><br>
+                <br>
+                <input type="submit" name="register" value="Register">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{% endblock %}

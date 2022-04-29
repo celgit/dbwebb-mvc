@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>All them books yo</legend>
+            {% if books is empty %}
+            <h3>No books found</h3>
+            {% endif %}
+            {% for book in books %}
+                <h3>Title</h3>
+                {{ book.getTitle() }}
+                <h3>ISBN</h3>
+                {{ book.getIsbn() }}
+                <h3>Author</h3>
+                {{ book.getAuthor() }}
+                <h3>Image Url</h3>
+                <img src="{{ book.getImageUrl() }}">
+                <hr>
+            {% endfor %}
+        </fieldset>
+    </div>
+{% endblock %}
+
+{#Detta är detalj-sidan, eg, så man ska klicka på länken av en bild på boken och komma till denna info#}

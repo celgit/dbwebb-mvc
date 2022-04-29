@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="textHandle">
+    <fieldset>
+        <legend>Functions</legend>
+        <ul>
+{#            <li><a href="{{ url("register_book") }}">Register book</a></li>#}
+            <li><a href="{{ url("register_book_form") }}">Register book</a></li>
+            <li><a href="{{ url("books_show_all") }}">Show all books</a></li>
+            <li><a href="{{ url("books_by_id", {id:1}) }}">Show book by id</a></li>
+            <li><a href="{{ url("books_delete_by_id", {id:1}) }}">Delete book by id</a></li>
+{#            <li><a href="{{ url("book_update", {id:1}, {title:'titelTest2'}, {isbn:'omgIsbn'}, {author:'authorNo'}, {img_url:'dev/null'}) }}">Update book by id</a></li>#}
+        </ul>
+    </fieldset>
+</div>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+{#    <h2>Functions</h2>#}
+{#    <ul>#}
+{#        <li>#}
+{#            <a href="{{ url("register_book") }}">Register book</a> |#}
+{#        </li>#}
+{#    </ul>#}
+
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/Users/cel/Code/dbwebb-kurser/mvc/me/report/src/Controller/BookController.php'|file_link(0) }}">src/Controller/BookController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/Users/cel/Code/dbwebb-kurser/mvc/me/report/templates/book/index.html.twig'|file_link(0) }}">templates/book/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}
