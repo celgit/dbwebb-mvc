@@ -5,23 +5,39 @@
 {% block content %}
     <div class="textHandle">
         <fieldset>
-            <legend>All them books yo</legend>
+            <legend>These books exist in the DB</legend>
             {% if books is empty %}
             <h3>No books found</h3>
             {% endif %}
+            <table style="width:100%">
+                <tr>
+                    <th><h2>Title</h2></th>
+                    <th><h2>Action</h2></th>
+                </tr>
+                <tr>
             {% for book in books %}
-                <h3>Title</h3>
-                {{ book.getTitle() }}
-                <h3>ISBN</h3>
-                {{ book.getIsbn() }}
-                <h3>Author</h3>
-                {{ book.getAuthor() }}
-                <h3>Image Url</h3>
-                <img src="{{ book.getImageUrl() }}">
-                <hr>
+                    {% set bookId = book.getId() %}
+                <tr>
+                    <td><h3>{{ book.getTitle() }}</h3></td>
+                    <td>
+                        <br>
+                        <form action="{{ path("books_by_id", {id:bookId}) }}" method="get">
+                            <button> Details </button>
+                        </form>
+                        <br>
+                        <form action="{{ path("books_update_form", {id:bookId}) }}" method="get">
+                            <button> Update </button>
+                        </form>
+                        <br>
+                        <form action="{{ path("books_delete_by_id", {id:bookId}) }}" method="post">
+                            <button onclick="return confirm('Are you really really sure?')"> Delete </button>
+                        </form>
+                        <br>
+                    </td>
+                </tr>
             {% endfor %}
+            </table>
+            <a href="{{ url("register_book_form") }}">Register new book</a>
         </fieldset>
     </div>
 {% endblock %}
-
-{#Detta är detalj-sidan, eg, så man ska klicka på länken av en bild på boken och komma till denna info#}

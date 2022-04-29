@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,10 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/register", name="register_book")
+     * @Route(
+     *     "/books/register",
+     *     name="register_book",
+     *     methods={"POST"} )
      */
     public function registerBook(
         ManagerRegistry $doctrine,
@@ -51,13 +55,15 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/show", name="books_show_all")
+     * @Route(
+     *     "/books/show",
+     *     name="books_show_all",
+     *     methods={"GET"})
      */
     public function showAllBooks(
         BookRepository $bookRepository
     ): Response {
 
-        //Fixa twig för detta, som visar upp den.
         $books = $bookRepository
             ->findAll();
 
@@ -69,22 +75,84 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/show/{id}", name="books_by_id")
+     * @Route(
+     *     "/books/show/{id}",
+     *     name="books_by_id",
+     *     methods={"GET"})
      */
     public function showBookById(
         BookRepository $bookRepository,
         int $id
     ): Response {
 
-        //Fixa twig för detta, som visar upp den.
         $book = $bookRepository
             ->find($id);
 
-        return $this->json($book);
+        $data = [
+            'book' => $book
+        ];
+
+        return $this->render('books/book_details.html.twig', $data);
     }
 
     /**
-     * @Route("/books/delete/{id}", name="books_delete_by_id")
+     * @Route("/books/update_form/{id}", name="books_update_form")
+     */
+    public function updateBookForm(
+        BookRepository $bookRepository,
+        int $id
+    ): Response {
+
+        $book = $bookRepository
+            ->find($id);
+
+        $data = [
+            'book' => $book
+        ];
+
+        return $this->render('books/update_book_form.html.twig', $data);
+    }
+
+    /**
+     * @Route(
+     *     "/books/update/{id}",
+     *     name="books_update",
+     *     methods={"POST"})
+     * @throws Exception
+     */
+    public function updateBook(
+        BookRepository $bookRepository,
+        ManagerRegistry $doctrine,
+        Request $request
+    ): Response {
+        $id = $request->request->get('id');
+        $entityManager = $doctrine->getManager();
+        $book = $bookRepository->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id '.$id
+            );
+        }
+
+        $book->setTitle($request->request->get('title'));
+        $book->setIsbn($request->request->get('isbn'));
+        $book->setAuthor($request->request->get('author'));
+        $book->setImageUrl($request->request->get('image_url'));
+        $entityManager->flush();
+
+        $data = [
+            'id' => $id
+        ];
+
+        return $this->redirectToRoute('books_by_id', $data);
+    }
+
+    /**
+     * @Route(
+     *     "/books/delete/{id}",
+     *     name="books_delete_by_id",
+     *     methods={"POST"})
      */
     public function deleteBookById(
         ManagerRegistry $doctrine,
@@ -100,35 +168,6 @@ class BookController extends AbstractController
         }
 
         $entityManager->remove($book);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('books_show_all');
-    }
-
-    /**
-     * @Route("/books/update/{id}/{value}", name="book_update")
-     */
-    public function updateBook(
-        ManagerRegistry $doctrine,
-        int $id,
-        int $title,
-        int $isbn,
-        int $author,
-        int $imgUrl,
-    ): Response {
-        $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($id);
-
-        if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id '.$id
-            );
-        }
-
-        $book->setValue($title);
-        $book->setValue($isbn);
-        $book->setValue($author);
-        $book->setValue($imgUrl);
         $entityManager->flush();
 
         return $this->redirectToRoute('books_show_all');
