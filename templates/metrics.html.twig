@@ -11,12 +11,60 @@
         <ul>
             <li>Coverage</li>
                 Detta handlar om att man ska ha testtäckning av sin kod. I en perfekt värld är all kod täckt av tester.
-                
+                Om man t.ex. har en metod som ska avgöra vem som vunnit baserat på 2 variabler som skickas in (händer),
+                och i metoden finns ett par if-satser vilket kan ge 3 olika resultat.
+                Då behöver man skriva tester som har rätt förutsättning för att få ut alla 3 olika resultaten, då
+                har man fullständig täckning av den metoden.
             <li>Complexity</li>
+                Kan även kallas: Cyclomatic complexity.
+                Det är ett sätt att se hur komplicerad koden är. Om t.ex. metoden ovan endast skrivit ut en rad istället,
+                då hade den haft ett CC-värde av 1. Om den istället, som i exemplet ovan, kan ge 3 olika resultat har den
+                ett cc-värde på 4, 1 för själva metoden och 1 poäng för varje möjligt resultat.
+                Man vill hålla nere komplexiteten så mycket som möjligt, helst under 10.
             <li>Cohesion</li>
+                Detta handlar om att en klass och / eller metod har ansvar för en sak.
+                Exempelvis, om en klass som handlar om en kortlek endast hanterar kortleken och inte korten har den
+                låg cohesion, om den däremot börjar hantera saker som är utanför dess egen klass, då har den högre cohesion.
+                En metod ska också ha låg cohesion, den ska ha ett syfte, göra en sak, inte göra massa saker, då ökar
+                cohesion-värdet.
             <li>Coupling</li>
+                Det finns 2 typer av coupling, "efferent" och "afferent", det förstnämnda är hur många
+                andra klasser en viss klass är beroende av och det sistnämnda är hur många klasser som
+                är beroende av en viss klass.
+                T.ex. är en kortlek-klass som innehåller kort beroende av kort-klassen men kort-klassen är inte beroende
+                av kortleken. Det är oundvikligt att ha coupling, det är dock viktigt att man håller nere beroendet
+                av andra klasser i en klass, så mycket det går.
         </ul>
 
+        Om man har god testtäckning, simpel kod som inte har klasser som gör mer än vad de ska och metoder som även de
+        är simpla, då får man bra kodkvalitet.
     </p>
+    <hr>
+    <h2>Phpmetrics</h2>
+    <p>
+        <ul>
+        <li>Coverage</li>
+            Jag har lyckats få 100% testtäckning i min kod, står dock inget om det i phpmetrics men ja, vet att jag har det.
+        <li>Complexity</li>
+            Genomsnittsvärdet för Cyclomatic complexity för mina klasser är 3.58, klart godkänt, känner mig nöjd där och
+            ser ingen anledning till att förbättra koden mer, även buggarna ligger på ett snitt på 0.09, inte mycket
+            att göra där heller.
+        <li>Cohesion</li>
+            Jag har ett par kontrollers som ska hantera en hel del kring spelen, men utöver deras potentiella spretighet
+            är cohesion-biten i min kod mycket bra, alla klasser hanterar endast sin del, även kontrollerna i den
+            bemärkelsen att de sköter det som inte passar in i någon specifik klass utan "sträcker sig över flera" eller
+            är mer åt det generella hållet.
+        <li>Coupling</li>
+            Högsta Afferent coupling-värdet är 4, vilket är oerhört bra värde, inget å förbättra där.
+            Högsta Efferent coupling-värdet är 9, vilket är i gamecontrollern, den är ju spindeln i nätet
+            vilket gör det fullt naturligt att den påverkas av, är nöjd med 9.
+        </ul>
+    </p>
+    <hr>
+    <h2>Scrutinizer</h2>
+    <p>
+
+    </p>
+
 </div>
 {% endblock %}

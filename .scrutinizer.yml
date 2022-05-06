@@ -2,15 +2,15 @@ imports:
     - php
 
 filter:
-#    paths: [vendor/*, test/*]
-    excluded_paths: [vendor/*, test/*]
-#        - vendor/*
-#        - test/*
-#        - tools/*
-#        - assets/*
-#        - src/Repository/*
-#        - src/Kernel.php
-
+    excluded_paths:
+        - 'tests/*'
+        - 'bin/*'
+        - 'tools/*'
+        - '*.min.js'
+        - '*/vendor/*'
+        - 'build/*'
+    dependency_paths:
+        - 'tools/*'
 build:
     nodes:
         my-tests:
@@ -29,3 +29,14 @@ build:
                 coverage:
                     file: "build/coverage.clover"
                     format: "php-clover"
+
+checks:
+    php: true
+    javascript: true
+coding_style:
+    php:
+        spaces:
+            around_operators:
+                bitwise: false
+            other:
+                after_type_cast: false
