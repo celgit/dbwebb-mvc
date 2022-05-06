@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Game
 {
-    public CONST MAX_HAND_VALUE = 21;
+    public const MAX_HAND_VALUE = 21;
 
     /**
      * @param float|bool|int|string|null $reset
