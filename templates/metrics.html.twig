@@ -63,7 +63,48 @@
     <hr>
     <h2>Scrutinizer</h2>
     <p>
+        Denna är svår, fick ett värde på 9.93 av den, sen fick jag problem med configen (9.93 blev med en standard config),
+        fick ordning på en config som är en mix av mos och den som fanns innan, då fick jag 10.0.
+        Vet inte riktigt vad jag ska förbättra där, förutom att exkludera kernel.php kanske, en fil jag inte ens skrivit.
+    </p>
+    <hr>
+    <h2>Förbättringar</h2>
+    <p>
+        När jag skulle koppla på scrutinizer till repot behövde jag göra de olika kollerna, som composer phpstan etc.
+        Då klagades det en del på att jag inte specat vad de olika arrayerna i metoderna ska innehålla (strängar, object etc).
+        Så det jag gjorde inför det var att lägga in det överallt så alla kontroller gick genom gällande det som jag fann
+        relevant. Även att vissa variabler inte var deklarerade, det löste jag genom att jag skapade en privat variabel
+        i de olika klasserna och skickade ut den genom $this->VARIABEL ist för att skriva variabeln där direkt i metoden.
 
+        Jag gjorde dessa implementationer efter jag startat första scrutinizer-körningen, då fick jag 9.93...<br>
+        Ett par körningar efter det, när jag fått ordning på configen, fick jag 10.0....
+        Phpmetrics klagade inte alls dock.<br>
+        Phpmetrics hade 2 varningar för Entity och Dice: <i>Packages should be either abstract and stable or concrete and instable.</i><br>
+        Har läst massor om det men förstår inte hur jag kommer förbi det och iom att det bara är 2 varningar och inga andra klagomål låter jag de vara.
+
+    </p>
+    <hr>
+    <h2>Diskussion</h2>
+    <p>
+        Okej, min situation är lite speciell, koden och lösningen var bra redan innan jag började använda dessa verktyg.<br>
+        Det är dock mycket för att jag jobbat med php-kod nu i snart 1 år och lärt mig oerhört mycket genom arbetet.<br>
+        Jag kan dock se ett otroligt högt värde i dessa verktyg då man får hjälp med att skriva bra kod.<br>
+        Målet är ju dock att man ska ha dem till att bekräfta att ens kod är bra redan innan verktygen blandas in, lite som
+        det blev i mitt fall, då har man lyckats. <br>
+        Målet är ju lite som med många hjälpmedel, i början behöver man använda dem men sen får man in tänket och då
+        får man bra kodkvalitét från början. För mig har det hjälpt att skriva koden rörigt först, att få ihop den, få dit
+        funktionaliteten man är ute efter. Därefter refaktorerar man och bryter ut och förminskar metoder och klasser.<br>
+        Det pratas på jobbet TDD, att man ska skriva tester först, och sen skriva sin kod. Jag har dock svårt för det då
+        jag behöver tänka genom att skriva kod, vet inte ens hur slutresultatet blir, vilket gör det svårare att testa först.<br>
+        Om man har testandet i åtanke dock, att man ska vara klar med en metod / klass när den är enkel att testa, då får man
+        automatisk bra kod.<br>
+        <br>
+        Nackdelar, nja, tycker inte det finns några, iaf inte med verktygen, men däremot är det inte så enkelt att få till
+        bra kod i det stora hela om man jobbar med en legacy-kodbas som är komplex och svår att arbeta med från början.<br>
+        Det har jag också erfarenhet av på jobbet då mycket av kodbasen är gammal, därför är det extra viktigt att vi
+        refaktorerar och gör koden bättre varje gång vi är någonstans. Det är nog därför jag har lite lättare än andra
+        i kursen för att få bra kod från början. När jag kikat på tidigare saker jag gjort i script och liknande på jobbet
+        ser jag tydligt hur mycket förbättringspotential, då hade dessa verktyg varit oerhört bra.
     </p>
 
 </div>
