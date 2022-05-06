@@ -2,14 +2,14 @@ imports:
     - php
 
 filter:
-    paths: [vendor/*, test/*]
-    excluded_paths:
-        - vendor/*
-        - test/*
-        - tools/*
-        - assets/*
-        - src/Repository/*
-        - src/Kernel.php
+#    paths: [vendor/*, test/*]
+    excluded_paths: [vendor/*, test/*]
+#        - vendor/*
+#        - test/*
+#        - tools/*
+#        - assets/*
+#        - src/Repository/*
+#        - src/Kernel.php
 
 build:
     nodes:
