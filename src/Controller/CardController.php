@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Cards\Card;
 use App\Cards\Deck;
 use App\Cards\DeckOfJokers;
 use App\Cards\JsonDeck;
@@ -15,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CardController extends AbstractController
 {
+    /**
+     * @var array<array>
+     */
+    private array $drawnCards;
+
     /**
      * @Route("/card", name="card")
      */
@@ -123,13 +129,13 @@ class CardController extends AbstractController
             $numOfGivenDraws = 52;
         }
 
-        $drawnCards[] = $deck->drawGivenNumOfCards($numOfGivenDraws);
+        $this->drawnCards[] = $deck->drawGivenNumOfCards($numOfGivenDraws);
         $session->set('deck', $deck->getDeck());
 
         $data = [
             'deck' => $deck->getDeck(),
             'numOfDraws' => $request->get('numOfDraws'),
-            'drawnCards' => $drawnCards
+            'drawnCards' => $this->drawnCards
         ];
 
         return $this->render('card/draw-multiple-cards.html.twig', $data);

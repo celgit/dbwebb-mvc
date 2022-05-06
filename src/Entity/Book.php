@@ -11,19 +11,19 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $title;
+    private string $title;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $isbn;
+    private string $isbn;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $author;
+    private string $author;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $image_url;
+    private string $imageUrl;
 
     public function getId(): ?int
     {
@@ -68,12 +68,12 @@ class Book
 
     public function getImageUrl(): ?string
     {
-        return $this->image_url;
+        return $this->imageUrl;
     }
 
-    public function setImageUrl(string $image_url): self
+    public function setImageUrl(string $imageUrl): self
     {
-        $this->image_url = $image_url;
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }

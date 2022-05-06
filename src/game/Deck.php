@@ -9,7 +9,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Deck
 {
+    /**
+     * @var array<Card>
+     */
     private array $deck;
+
+    /**
+     * @var array<Card>
+     */
+    private array $drawnCards;
     protected const SUITS = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
     protected const CARD_VALUES = [
         '2' => 2,
@@ -28,7 +36,7 @@ class Deck
     ];
 
     /**
-     * @param array $deck
+     * @param array<Card> $deck
      */
     public function __construct(array $deck = [])
     {
@@ -52,10 +60,11 @@ class Deck
 
     /**
      * @throws Exception
+     * @return array<Card>
      */
     public function drawGivenNumOfCards(int $numCardsToDraw): array
     {
-        $drawnCards = [];
+        $this->drawnCards = [];
         $deckSize = count($this->deck);
 
         if ($numCardsToDraw > $deckSize) {
@@ -64,15 +73,15 @@ class Deck
 
         for ($i = 0; $i < $numCardsToDraw; $i++) {
             $randomNumber = random_int(0, count($this->deck) - 1);
-            $drawnCards[] = $this->deck[$randomNumber];
+            $this->drawnCards[] = $this->deck[$randomNumber];
             array_splice($this->deck, $randomNumber, 1);
         }
 
-        return $drawnCards;
+        return $this->drawnCards;
     }
 
     /**
-     * @return array
+     * @return array<Card>
      */
     public function getDeck(): array
     {
@@ -91,7 +100,7 @@ class Deck
     }
 
     /**
-     * @param array $cards
+     * @param array<Card> $cards
      */
     public function addToDeck(array $cards): void
     {

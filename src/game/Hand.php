@@ -6,10 +6,13 @@ namespace App\game;
 
 class Hand extends Deck
 {
+    /**
+     * @var array<Card>
+     */
     private array $hand = [];
 
     /**
-     * @return array
+     * @return array<Card>
      */
     public function getHand(): array
     {
@@ -17,7 +20,7 @@ class Hand extends Deck
     }
 
     /**
-     * @param array $cards
+     * @param array<Card> $cards
      */
     public function addToHand(array $cards): void
     {

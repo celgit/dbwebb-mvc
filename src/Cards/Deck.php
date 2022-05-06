@@ -8,6 +8,9 @@ use Exception;
 
 class Deck
 {
+    /**
+     * @var array<Card>
+     */
     private array $deck;
     protected const SUITS = ["&hearts;", '&diams;', '&clubs;', '&spades;'];
     protected const CARD_VALUES = [
@@ -27,7 +30,7 @@ class Deck
     ];
 
     /**
-     * @param array $deck
+     * @param array<Card> $deck
      */
     public function __construct(array $deck = [])
     {
@@ -53,6 +56,7 @@ class Deck
 
     /**
      * @throws Exception
+     * @return array<Card>
      */
     public function drawGivenNumOfCards(int $numCardsToDraw): array
     {
@@ -73,7 +77,7 @@ class Deck
     }
 
     /**
-     * @return array
+     * @return array<Card>
      */
     public function getDeck(): array
     {
@@ -92,7 +96,7 @@ class Deck
     }
 
     /**
-     * @param array $cards
+     * @param array<Card> $cards
      */
     public function addToDeck(array $cards): void
     {

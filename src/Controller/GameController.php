@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\game\Card;
 use App\game\Deck;
 use App\game\Game;
 use App\game\Hand;
@@ -15,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
+    /**
+     * @var array<Card>
+     */
+    private array $hands;
+
     /**
      * @Route("/game", name="game-home")
      */
@@ -70,14 +76,14 @@ class GameController extends AbstractController
             $this->addFlash('info', $game->handleDoneInput($playerHand, $session, $dealerHand));
         }
 
-        $hands['player'] = $playerHand;
-        $hands['dealer'] = $dealerHand;
+        $this->hands['player'] = $playerHand;
+        $this->hands['dealer'] = $dealerHand;
 
         $data = [
             'deck' => $deck->getDeck(),
             'players' => $players,
             'numOfCards' => $numOfCards,
-            'hands' => $hands,
+            'hands' => $this->hands,
             'playerHasAces' => $playerHand->handContainsAce(),
             'dealerHasAces' => $dealerHand->handContainsAce(),
             'playerHandValueAceAs14' => $playerHand->getHandValue(),
