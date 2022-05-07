@@ -82,16 +82,20 @@ Redovisning
   *Hur doctrine fungerar i den bemärkelsen att den kan skapa mycket av koden automatiskt, mycket av den vanliga koden som ändå alltid är på ett visst sätt, som grunden i kontrollern, klasserna med setters å getters etc. Mycket smidigt! Man får ju även start på routen å liknande.*
 
 ### Kmom06 - Automatiserad test
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
+  #### _Hur uppfattade du verktyget phpmetrics och fann du några särskilda bitar mer värdefulla än andra? Var det några särskilda metrics eller bilder du uppskattade?._
+  *Oerhört bra verktyg!*  
+  *Det mest värdefulla här tycker jag är html-rapporten, jag gillar det oerhört mycket, smidigt att generera samt lätt att gå genom.*  
+  *Violations var nice, där kan man se om man gjort något knas med eller liknande. Även coupling å det var intressant. Relations var väl det jag inte fann så givande.*
+  #### _Berätta hur det gick att integrera med Scrutinizer och vilken är din första känsla av verktyget och dess badges? Vilken kodtäckning och kodkvalitet fick du efter första bygget?_
+  *Det gick bra, men config-filen fungerade inte alls. När jag integrera den först hade jag ingen config, då fungerade det, men sen när jag skulle använda den som mos gav oss fungerade det inte, den började då testa vendor å all annan skit som gav riktigt låga poäng..*
+  *Jag luskade fram den configen som användes när det gick, å kombinerade dem, då gick det bättre, coverage vill den dock inte sammarbeta med, men jag vet att jag har 100% testtäckning.*
+  *Badges, ja, det är väl smidigt men jag ser det eg. som "floskler" som är bra för investerare, den som använder sidan skiter i hur kodkvaliten ser ut, bara det fungerar som det ska, å den som skriver koden är ju inte på sidan och ser dem ändå, den vet ju hur koden är.*  
+  *Mitt första bygge gav ett betyg på 9.93.. Fick den till 10.0 när jag fick ordning på configen. Även om coverage är helt galet snett.*
+  #### _Hur är din egen syn på kodkvalitet, berätta lite om den? Tror du man kan man påvisa kodkvalitet i någon viss mån med badges eller vad tror du?_
+  *Jag tycker det är oerhört viktigt. Brukar tänka att jag ska skriva koden så lättläst att om jag blir dement innan nästa gång jag såg ser den igen ska jag ändå kunna förstå den. Det ska även vara lätt att testa så man kan lita på det.*
+  *När jag gått genom dessa frågor och uppgiften kom jag på en viktig sak för kodkvaliten, verktygen vi har arbetat med här är ju bra när man är klar med grejjerna. Dock är det bättre att ha en bra IDE, jag sitter i phpstorm och den varnar mig om jag gör något som inte är bra kod, den säger t.ex. till att deklarera en variabel å sen direkt returnera den är sämre än att bara returnera det man sätter variabeln till. Det är otroligt hjälpsamt. Tror inte jag hade fått lika bra kod i notepad. Men man ska använda så mycket verktyg man kan, för att kunna fokusera på själva funktionerna som ens app / sida ska göra.*
+  #### _Vilken är din TIL för detta kmom?_
+  *Hur man får fram en rapport med phpmetrics och hur man kopplar scrutinizer till git.*
 
 ### Kmom10 - Slutprojekt
   #### _FRÅGA_
