@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0ee15f494d740a4fbf6fdfbddade554e7f85f279',
+        'reference' => 'ece14e67258be62a323ea4f50c6a3da904503e28',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0ee15f494d740a4fbf6fdfbddade554e7f85f279',
+            'reference' => 'ece14e67258be62a323ea4f50c6a3da904503e28',
             'dev_requirement' => false,
         ),
         'halleck45/php-metrics' => array(

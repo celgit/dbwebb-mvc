@@ -79,7 +79,7 @@ class Game
         return ($hand->getHandValue() > self::MAX_HAND_VALUE &&
                 !$hand->handContainsAce()) ||
             ($hand->getHandValue() > self::MAX_HAND_VALUE &&
-                ($hand->getHandValueWithAces($this)) > self::MAX_HAND_VALUE );
+                ($hand->getHandValueWithAces($this)) > self::MAX_HAND_VALUE);
     }
 
     /**

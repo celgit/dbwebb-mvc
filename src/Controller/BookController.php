@@ -63,7 +63,6 @@ class BookController extends AbstractController
     public function showAllBooks(
         BookRepository $bookRepository
     ): Response {
-
         $books = $bookRepository
             ->findAll();
 
@@ -84,7 +83,6 @@ class BookController extends AbstractController
         BookRepository $bookRepository,
         int $id
     ): Response {
-
         $book = $bookRepository
             ->find($id);
 
@@ -102,7 +100,6 @@ class BookController extends AbstractController
         BookRepository $bookRepository,
         int $id
     ): Response {
-
         $book = $bookRepository
             ->find($id);
 
