@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Tires{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>These tires exist in the DB</legend>
+            {% if tires is empty %}
+            <h3>No tires found</h3>
+            {% endif %}
+            <table style="width:100%">
+                <tr>
+                    <th><h4>Model</h4></th>
+                    <th><h4>Brand</h4></th>
+                    <th><h4>Width</h4></th>
+                    <th><h4>Profile</h4></th>
+                    <th><h4>Rim size</h4></th>
+                    <th><h4>Actions</h4></th>
+                </tr>
+                <tr>
+            {% for tire in tires %}
+                    {% set tireId = tire.getId() %}
+                <tr>
+                    <td>{{ tire.brand() }}</td>
+                    <td>{{ tire.model() }}</td>
+                    <td>{{ tire.width() }}</td>
+                    <td>{{ tire.profile() }}</td>
+                    <td>{{ tire.rimSize() }}</td>
+                    <td>
+                        <br>
+                        <form action="{{ path("tires_by_id", {id:tireId}) }}" method="get">
+                            <button> Details </button>
+                        </form>
+                        <br>
+                        <form action="{{ path("tires_update_form", {id:tireId}) }}" method="get">
+                            <button> Update </button>
+                        </form>
+                        <br>
+                        <form action="{{ path("tires_delete_by_id", {id:tireId}) }}" method="post">
+                            <button onclick="return confirm('Are you really really sure?')"> Delete </button>
+                        </form>
+                        <br>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+            <a href="{{ url("register_tire_form") }}">Register new tire</a>
+        </fieldset>
+    </div>
+{% endblock %}

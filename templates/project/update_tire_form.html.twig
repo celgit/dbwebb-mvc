@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update tire!{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>Update book</legend>
+        {% set tireId = tire.getId() %}
+        <form method="POST" action="{{ path("tires_update", {id:tireId}) }}">
+            <p><Label>Tire details:</Label><br>
+                <input type="text" name="id" value="{{ tireId }}" hidden><br>
+                <label>Brand:</label><br><input type="text" name="brand" value="{{ tire.getBrand() }}"><br>
+                <br>
+                <label>Model:</label><br><input type="text" name="model" value="{{ tire.getModel() }}"><br>
+                <br>
+                <label>Width:</label><br><input type="number" name="width" value="{{ tire.getWidth() }}"><br>
+                <br>
+                <label>Profile:</label><br><input type="number" name="profile" value="{{ tire.getProfile() }}"><br>
+                <br>
+                <label>Rim size:</label><br><input type="number" name="rimsize" value="{{ tire.getRimSize() }}"><br>
+                <br>
+                <input type="submit" name="update" value="Update">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{% endblock %}

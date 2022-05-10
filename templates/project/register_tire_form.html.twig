@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register tire!{% endblock %}
+
+{% block content %}
+<div class="textHandle">
+    <fieldset>
+        <legend>Register tire</legend>
+        <form method="POST" action="{{ path("register_tire") }}">
+            <h3>Enter tire details</h3>
+            <p>
+                <br>
+                <label for="brand">Brand:</label><br><input type="text" name="brand" id="title" value=""><br>
+                <br>
+                <label for="model">Model:</label><br><input type="text" name="model" id="model" value=""><br>
+                <br>
+                <label for="width">Width:</label><br><input type="number" name="width" id="width" value=""><br>
+                <br>
+                <label for="profile">Profilel:</label><br><input type="number" name="profile" id="profile" value=""><br>
+                <br>
+                <label for="rimsize">Rim zsize:</label><br><input type="number" name="rimsize" id="rimsize" value=""><br>
+                <br>
+                <input type="submit" name="register" value="Register">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{% endblock %}

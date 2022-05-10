@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Tires{% endblock %}
+
+{% block content %}
+    <div class="textHandle">
+        <fieldset>
+            <legend>All them tires yo</legend>
+            <a href="{{ url("tires_show_all") }}"><-Back</a>
+            <h3>Brand</h3>
+            {{ tire.getBrand() }}
+            <h3>Model</h3>
+            {{ tire.getModel() }}
+            <h3>Width</h3>
+            {{ tire.getWidth() }}
+            <h3>Profile</h3>
+            {{ tire.getProfile() }}
+            <h3>Rim size</h3>
+            {{ tire.getRimSize() }}
+            <hr>
+        </fieldset>
+    </div>
+{% endblock %}
