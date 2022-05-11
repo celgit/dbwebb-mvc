@@ -74,9 +74,9 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Tire[] Returns an array of Project objects
+     * @return array|int Returns an array of Project objects
      */
-    public function getOrderedResult(): array
+    public function getOrderedResult(): array | int
     {
         return $this->createQueryBuilder('tire')
             ->orderBy('tire.brand', 'ASC')

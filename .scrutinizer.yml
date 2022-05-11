@@ -10,6 +10,10 @@ filter:
         - '*/vendor/*'
         - 'build/*'
         - 'src/kernel.php'
+        - 'src/Cards/*'
+        - 'src/Dice/*'
+        - 'src/Entity/Book.php'
+        - 'src/Repository/*'
     dependency_paths:
         - 'tools/*'
 build:
