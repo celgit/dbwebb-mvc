@@ -28,6 +28,8 @@ class Tire
     #[ORM\Column(type: 'integer', nullable: true)]
     private int $rimSize;
 
+    private const PRICE_HUNT_LINK = 'https://www.prisjakt.nu/search?search=';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,5 +93,22 @@ class Tire
         $this->rimSize = $rimSize;
 
         return $this;
+    }
+
+    public function getSearchLink()
+    {
+        $slashString = '%2F';
+        $spaceString = ' ';
+
+        return self::PRICE_HUNT_LINK
+            . $this->getBrand()
+            . $spaceString
+            . $this->getModel()
+            . $spaceString
+            . $this->getWidth()
+            . $slashString
+            . $this->getProfile()
+            . ' R '
+            . $this->getRimSize();
     }
 }

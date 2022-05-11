@@ -11,22 +11,30 @@
             {% endif %}
             <table style="width:100%">
                 <tr>
-                    <th><h4>Model</h4></th>
                     <th><h4>Brand</h4></th>
+                    <th><h4>Model</h4></th>
                     <th><h4>Width</h4></th>
                     <th><h4>Profile</h4></th>
                     <th><h4>Rim size</h4></th>
+                    <th><h4>Price search</h4></th>
                     <th><h4>Actions</h4></th>
                 </tr>
                 <tr>
             {% for tire in tires %}
+{#                    {% set tireId = tire['id'] %}#}
                     {% set tireId = tire.getId() %}
                 <tr>
+{#                    <td>{{ tire['brand'] }}</td>#}
+{#                    <td>{{ tire['model'] }}</td>#}
+{#                    <td>{{ tire['width'] }}</td>#}
+{#                    <td>{{ tire['profile'] }}</td>#}
+{#                    <td>{{ tire['rim_size'] }}</td>#}
                     <td>{{ tire.brand() }}</td>
                     <td>{{ tire.model() }}</td>
                     <td>{{ tire.width() }}</td>
                     <td>{{ tire.profile() }}</td>
                     <td>{{ tire.rimSize() }}</td>
+                    <td><a href="{{ tire.getSearchLink() }}" target="_blank">Prisjakt</a></td>
                     <td>
                         <br>
                         <form action="{{ path("tires_by_id", {id:tireId}) }}" method="get">

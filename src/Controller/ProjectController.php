@@ -76,7 +76,7 @@ class ProjectController extends AbstractController
         ProjectRepository $projectRepository
     ): Response {
         $tires = $projectRepository
-            ->findAll();
+            ->findAllSortedByBrand();
 
         $data = [
             'tires' => $tires
@@ -185,4 +185,6 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('tires_show_all');
     }
+
+    //TODO fixa reset-db
 }
