@@ -21,14 +21,8 @@
                 </tr>
                 <tr>
             {% for tire in tires %}
-{#                    {% set tireId = tire['id'] %}#}
                     {% set tireId = tire.getId() %}
                 <tr>
-{#                    <td>{{ tire['brand'] }}</td>#}
-{#                    <td>{{ tire['model'] }}</td>#}
-{#                    <td>{{ tire['width'] }}</td>#}
-{#                    <td>{{ tire['profile'] }}</td>#}
-{#                    <td>{{ tire['rim_size'] }}</td>#}
                     <td>{{ tire.brand() }}</td>
                     <td>{{ tire.model() }}</td>
                     <td>{{ tire.width() }}</td>

@@ -6,7 +6,7 @@
     "test[s]?"
   ],
   "report": {
-    "html": "docs/metrics"
+    "html": "public/docs/metrics"
   },
   "plugins": {
     "git": {

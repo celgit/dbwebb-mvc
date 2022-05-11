@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Exception;
 
 class ProjectController extends AbstractController
 {
@@ -26,7 +25,21 @@ class ProjectController extends AbstractController
      */
     public function projAbout(): Response
     {
-        return $this->render('project/proj-about.html.twig');
+        return $this->render('project/about.html.twig');
+    }
+
+    /**
+     * @Route("/proj/reset", name="reset_proj_db")
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function resetProjDb(
+        ProjectRepository $projectRepository
+    ): Response
+    {
+        $projectRepository->resetDatabase();
+        $projectRepository->populateDatabase();
+
+        return $this->redirectToRoute('app_project');
     }
 
     /**
@@ -41,12 +54,13 @@ class ProjectController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
 
-        $tire = new Tire();
-        $tire->setBrand($request->request->get('brand'));
-        $tire->setModel($request->request->get('model'));
-        $tire->setWidth($request->request->get('width'));
-        $tire->setProfile($request->request->get('profile'));
-        $tire->setRimSize($request->request->get('rimsize'));
+        $brand = $request->request->get('brand');
+        $model = $request->request->get('model');
+        $width = $request->request->get('width');
+        $profile = $request->request->get('profile');
+        $rimSize = $request->request->get('rimsize');
+
+        $tire = new Tire($brand, $model, $width, $profile, $rimSize);
 
         // tell Doctrine you want to (eventually) save the Product
         // (no queries yet)
@@ -61,7 +75,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/projk/register_form", name="register_tire_form")
      */
-    public function registerBookForm(): Response
+    public function registerTireForm(): Response
     {
         return $this->render('project/register_tire_form.html.twig');
     }
@@ -127,7 +141,6 @@ class ProjectController extends AbstractController
      *     "/proj/update/{id}",
      *     name="tires_update",
      *     methods={"POST"})
-     * @throws Exception
      */
     public function updateTire(
         ProjectRepository $projectRepository,
@@ -137,16 +150,7 @@ class ProjectController extends AbstractController
         $id = $request->request->get('id');
         $entityManager = $doctrine->getManager();
         $tire = $projectRepository->find($id);
-
-        if (!$tire) {
-            throw $this->createNotFoundException(
-                'No tire found for id ' . $id
-            );
-        }
         
-        error_log(print_r("BRAAAAAAAAAAAAAAAND", true));
-        error_log(print_r($request->request->get('brand'), true));
-
         $tire->setBrand($request->request->get('brand'));
         $tire->setModel($request->request->get('model'));
         $tire->setWidth($request->request->get('width'));
@@ -174,17 +178,42 @@ class ProjectController extends AbstractController
         $entityManager = $doctrine->getManager();
         $tire = $entityManager->getRepository(Tire::class)->find($id);
 
-        if (!$tire) {
-            throw $this->createNotFoundException(
-                'No book found for id ' . $id
-            );
-        }
-
         $entityManager->remove($tire);
         $entityManager->flush();
 
         return $this->redirectToRoute('tires_show_all');
     }
 
-    //TODO fixa reset-db
+    /**
+     * @Route(
+     *     "/docs/metrics",
+     *     name="docs_metrics",
+     *     )
+     */
+    public function docsMetrics(): Response
+    {
+        return $this->redirect('metrics/index.html');
+    }
+
+    /**
+     * @Route(
+     *     "/docs/phpdoc",
+     *     name="docs_phpdoc",
+     *     )
+     */
+    public function phpDocs(): Response
+    {
+        return $this->redirect('api/index.html');
+    }
+
+    /**
+     * @Route(
+     *     "/docs/phpunit",
+     *     name="docs_phpunit",
+     *     )
+     */
+    public function coverage(): Response
+    {
+        return $this->redirect('coverage/index.html');
+    }
 }
