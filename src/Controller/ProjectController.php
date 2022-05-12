@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Tire;
 use App\Repository\ProjectRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,11 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("/proj/reset", name="reset_proj_db")
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function resetProjDb(
         ProjectRepository $projectRepository
-    ): Response
-    {
+    ): Response {
         $projectRepository->resetDatabase();
         $projectRepository->populateDatabase();
 
@@ -150,7 +150,7 @@ class ProjectController extends AbstractController
         $id = $request->request->get('id');
         $entityManager = $doctrine->getManager();
         $tire = $projectRepository->find($id);
-        
+
         $tire->setBrand($request->request->get('brand'));
         $tire->setModel($request->request->get('model'));
         $tire->setWidth($request->request->get('width'));

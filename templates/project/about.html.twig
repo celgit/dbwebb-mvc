@@ -1,16 +1,78 @@
-{% extends "base.html.twig" %}
+{% extends "base_project.html.twig" %}
 
 {% block title %}About{% endblock %}
 
 {% block content %}
 <div class="textHandle">
     <h1>About my project</h1>
+    <h2>Om projektets funktion</h2>
+    (Håller mig till svenska här)<br>
     <p>
-        Text about the project TODO
+        Jag spenderar en stor del av sommarhalvåret med att köra bil på bana på diverse trackdays etc<br>
+        (dvs man tar sin, gatlegala bil och piskar runt en bana som t.ex. knutstorp eller kinnekulle)<br>
+        En av sakerna som förbrukas och kostar mycket pengar är däcken. När man kör bana är r-däck att föredra.<br>
+        Detta för att de är mycket klistrigare än vanliga däck och överhettas inte alls i samma utsträckning.<br>
+        Varje gång jag ska leta däck inser jag hur bökigt det är. För att få fram priser på däck måste man ha exakt<br>
+        modellnamn för att ens ha en chans att veta vad de kostar. Detta kombinerat med att det är få butiker på
+        nätet som markerar däcken för bankörning. Inte heller prisjakt gör det.<br>
+        <br>Mitt projekt handlar därför om ett verktyg som ska underlätta detta.<br>
+        Det är helt enkelt en databas med däckmodeller och dimensioner, som jag själv lagt in (i projektet i fråga har
+        jag lagt in 4st exempeldäck). Därefter skapas en prisjakts-länk som gör öppnar prisjakt och söker på valt däck.
+        <br>
+        Tanken från början var att använda prisjakts api, vilket jag troligen gör i framtiden, men vill inte lägga in
+        uppgifterna till api:t i publika repon som mitt repo i github för kursen eller på studentservern (då behörighet
+        till api:t kräver avtal med prisjakt).<br>
+        Gjorde därför enklast möjliga lösning för mitt behov, en sida som listar däcken, och en skapad länk.
+        Behöver inte vara svårare än så.<br>
+        Den simpla funktionen gör det även enklare att hålla koden i bakgrunden i högre kvalite.
+    </p>
+
+    <h2>Kodkvalite</h2>
+    <p>
+        För att hålla god kodkvalite tänker jag aktivt på att göra så<br>
+        små metoder med enskilda syften. Undviker att skriva metoder som<br>
+        har flera ansvarsområden och samtidigt hålla det så städat som möjligt.<br>
+        Till min hjälp kör jag IDE:n Phpstorm från Jetbrains med lite tillägg som <br>
+        Phpclean, php Annotations m.fl.<br>
+        Efter jag skrivit klart koden är det dags för testerna. Det går att argumentera för<br>
+        att göra testerna först enligt TDD men det krockar lite med mitt sätt att jobba å bemöta<br>
+        den typen av problemlösning kodningen kräver. Dock brukar jag försöka placera mig närmare <br>
+        TDD genom att först skapa POC (proof of concept), dvs få det fungera, även om det är <br>
+        rörigt och så, sen därefter, när jag vet att jag ska bryta ut saker till metoder<br>
+        då skriver jag testerna först. När de är klara kör jag dem, de blir röda, <br>
+        fixar koden för testet i fråga, kör det igen och det blir grönt, därefter går jag vidare.<br>
+        <br>
+        När jag är klar med testerna kör jag alla lint-verktyg och rättar det jag finner <br>
+        värt att korrigera. Exempel på det kan vara att man ska definera vad en array<br>
+        innehåller. Dock skippar jag de meddelandena om kod som automatiskt genererats<br>
+        eller som inte verkar vara logiska (t.ex. att den klagar på att en variabel <br>
+        ska ha sträng men får "bool|float|int|string|null" då den biten skapats av symfony.)<br>
+        <br>
+        Efter lint-körningarna kör jag metrics och går genom den. Det brukar se bra ut <br>
+        från början men ibland kan det vara något jag missat (inte varit det med projektet dock)<br>
+        En klagan den har på en av projektfilerna (projektkontrollern) är att den är en s.k.<br>
+        "god object", gränsen för att den ska anse att den är det passerades när jag <br>
+        lade till routes till phpdocs å phpmetrics, känner att den inte riktigt har rätt där.<br>
+        Scrutinizer tyckte att man ska hålla controllern till < 10 metoder men när jag går genom <br>
+        den ser jag att samtliga är nödvändiga routes och väljer då att ignorera dess förslag.<br>
+        (Totalbetyget i scrutinizer är ändå 10.0 :D ).<br>
+        <br>
+        När jag gjort sista commiten pushar jag koden och lämnar över allt till scrutinizer, den går då<br>
+        genom allt och hojtar till om det är något den fångat men som undkommit alla hjälpmedel och verktyg.<br>
+        <br>
+        Här nedan kan ni se länkar till diverse metrics, documentation och repon samt reset av databasen.
+        <hr>
     </p>
     <h3><a href="{{ url("docs_metrics") }}" target="_blank">Metrics</a></h3>
     <h3><a href="{{ url("docs_phpdoc") }}" target="_blank">PhpDoc</a></h3>
     <h3><a href="{{ url("docs_phpunit") }}" target="_blank">PhpUnit</a></h3>
     <h3><a href="https://github.com/celgit/dbwebb-mvc" target="_blank">Github</a></h3>
+    <h3><a href="https://scrutinizer-ci.com/g/celgit/dbwebb-mvc/" target="_blank">Scrutinizer</a></h3>
+    <h3>
+        <a href="{{ path("reset_proj_db") }}" onclick="return confirm('This will reset the database, are you sure?')">
+            Reset db
+        </a>
+    </h3>
+
 </div>
 {% endblock %}

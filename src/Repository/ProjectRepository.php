@@ -74,7 +74,7 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array|int Returns an array of Project objects
+     * @return array<Tire>|int Returns an array of Project objects
      */
     public function getOrderedResult(): array | int
     {

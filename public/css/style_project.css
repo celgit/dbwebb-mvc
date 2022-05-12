@@ -1,0 +1,93 @@
+html {
+  text-align: center;
+  box-sizing: border-box;   /* Alternate box model */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;      /* Alternate box model */
+}
+
+body {
+  overflow-y: scroll;     /* Always display scrollbar, no hopping pages */
+  font-size: 18px;
+  margin: 8px auto;
+  max-width: 1200px;
+  background-color: #2e3436;
+  color: whitesmoke;
+  font-family: "Fira Sans Condensed Book"
+}
+
+table, th, td {
+  border: 1px solid whitesmoke;
+  text-align: center;
+}
+
+.center {
+  margin: 0;
+  top: 50%;
+}
+
+.textHandle {
+  text-align: left;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.siteheader {
+  background-color: #545b62;
+  color: whitesmoke;
+  min-height: 60px;
+  min-width: 100%;
+}
+
+.navbar {
+  text-align: center;
+  background-color: #545b62;
+  margin-bottom: 24px;
+  padding: 0.5em;
+}
+
+.navbar a {
+  display: inline-block;
+  width: 110px;
+  /* width: 20%; */
+  padding: 0.5em;
+  background-color: #5eb5e0;
+  color: black;
+  text-decoration: none;
+}
+
+.main {
+  background-color: #2e3436;
+  width: calc(100% / 3 * 2);
+  min-height: 10em;
+  padding: 0 1em;
+}
+
+.sitefooter {
+  background-color: #545b62;
+  height: 50px;
+  line-height: 50px; /*Detta fixar vertical align av texten*/
+  min-width: 100%;
+  text-align: center;
+  color: whitesmoke;
+  margin-top: 10px;
+}
+
+legend {
+  text-align: center;
+}
+
+.almostCenter{
+  margin-left: 47%;
+}
+
+/* unvisited link */
+a:link {
+  color: whitesmoke;
+}
+
+/* visited link */
+a:visited {
+  color: whitesmoke;
+}
