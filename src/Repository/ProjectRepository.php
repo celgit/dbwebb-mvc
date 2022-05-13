@@ -92,11 +92,11 @@ class ProjectRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "INSERT INTO tire (brand,model,width,profile,rim_size) VALUES
-                ('Kumho','Ecsta V700',225,45,17),
-                ('Michelin','Pilot Sport Cup 2',225,40,18),
-                ('Federal','595-RS Pro',225,45,17),
-                ('Nankang','AR-1',225,45,17)";
+        $sql = "INSERT INTO tire (id,brand,model,width,profile,rim_size) VALUES
+                (1,'Kumho','Ecsta V700',225,45,17),
+                (2,'Michelin','Pilot Sport Cup 2',225,40,18),
+                (3,'Federal','595-RS Pro',225,45,17),
+                (4,'Nankang','AR-1',225,45,17)";
         $stmt = $conn->prepare($sql);
         $stmt->executeQuery();
     }

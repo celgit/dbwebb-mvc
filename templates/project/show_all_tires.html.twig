@@ -23,11 +23,11 @@
             {% for tire in tires %}
                     {% set tireId = tire.getId() %}
                 <tr>
-                    <td>{{ tire.brand() }}</td>
-                    <td>{{ tire.model() }}</td>
-                    <td>{{ tire.width() }}</td>
-                    <td>{{ tire.profile() }}</td>
-                    <td>{{ tire.rimSize() }}</td>
+                    <td>{{ tire.getBrand() }}</td>
+                    <td>{{ tire.getModel() }}</td>
+                    <td>{{ tire.getWidth() }}</td>
+                    <td>{{ tire.getProfile() }}</td>
+                    <td>{{ tire.getRimSize() }}</td>
                     <td><a href="{{ tire.getSearchLink() }}" target="_blank">Prisjakt</a></td>
                     <td>
                         <br>
