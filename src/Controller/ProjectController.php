@@ -39,7 +39,7 @@ class ProjectController extends AbstractController
         $projectRepository->resetDatabase();
         $projectRepository->populateDatabase();
 
-        return $this->redirectToRoute('app_project');
+        return $this->redirectToRoute('tires_show_all');
     }
 
     /**
