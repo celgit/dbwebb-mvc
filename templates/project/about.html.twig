@@ -63,16 +63,22 @@
         Här nedan kan ni se länkar till diverse metrics, documentation och repon samt reset av databasen.
         <hr>
     </p>
-    <h3><a href="{{ url("docs_metrics") }}" target="_blank">Metrics</a></h3>
-    <h3><a href="{{ url("docs_phpdoc") }}" target="_blank">PhpDoc</a></h3>
-    <h3><a href="{{ url("docs_phpunit") }}" target="_blank">PhpUnit</a></h3>
-    <h3><a href="https://github.com/celgit/dbwebb-mvc" target="_blank">Github</a></h3>
-    <h3><a href="https://scrutinizer-ci.com/g/celgit/dbwebb-mvc/" target="_blank">Scrutinizer</a></h3>
-    <h3>
-        <a href="{{ path("reset_proj_db") }}" onclick="return confirm('This will reset the database, are you sure?')">
-            Reset db
-        </a>
-    </h3>
+    <div class="row">
+        <div class="block"><h3><a href="{{ url("docs_metrics") }}" target="_blank">Metrics</a></h3></div>
+        <div class="block"><h3><a href="{{ url("docs_phpdoc") }}" target="_blank">PhpDoc</a></h3></div>
+        <div class="block"><h3><a href="{{ url("docs_phpunit") }}" target="_blank">PhpUnit</a></h3></div>
+        <div class="block"><h3><a href="https://github.com/celgit/dbwebb-mvc" target="_blank">Github</a></h3></div>
+        <div class="block">
+            <h3><a href="https://scrutinizer-ci.com/g/celgit/dbwebb-mvc/" target="_blank">Scrutinizer</a></h3>
+        </div>
+        <div class="block">
+            <h3>
+                <a href="{{ path("reset_proj_db") }}" onclick="return confirm('This will reset the database, are you sure?')">
+                    Reset db
+                </a>
+            </h3>
+        </div>
+    </div>
 
 </div>
 {% endblock %}
