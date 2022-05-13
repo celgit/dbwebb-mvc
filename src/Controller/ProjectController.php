@@ -76,7 +76,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/projk/register_form", name="register_tire_form")
+     * @Route("/proj/register_form", name="register_tire_form")
      */
     public function registerTireForm(): Response
     {
