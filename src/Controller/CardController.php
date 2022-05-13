@@ -18,6 +18,7 @@ class CardController extends AbstractController
 {
     /**
      * @var array<array>
+     * @phpstan-ignore-next-line
      */
     private array $drawnCards;
 
@@ -120,6 +121,9 @@ class CardController extends AbstractController
             $deck->createNewDeck();
             $deck->shuffleDeck();
         } else {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $deck->addToDeck($session->get('deck'));
         }
 

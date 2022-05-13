@@ -35,8 +35,6 @@ class ReportController extends AbstractController
             'contentFromMarkdownFile' => file_get_contents($fileName)
         ];
 
-
-
         return $this->render('report.html.twig', $data);
     }
 

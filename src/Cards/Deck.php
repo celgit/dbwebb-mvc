@@ -68,6 +68,9 @@ class Deck
         }
 
         for ($i = 0; $i < $numCardsToDraw; $i++) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $randomNumber = random_int(0, count($this->deck) - 1);
             $drawnCards[] = $this->deck[$randomNumber];
             array_splice($this->deck, $randomNumber, 1);

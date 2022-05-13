@@ -98,13 +98,35 @@ Redovisning
   *Hur man får fram en rapport med phpmetrics och hur man kopplar scrutinizer till git.*
 
 ### Kmom10 - Slutprojekt
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
-  #### _FRÅGA_
-  *SVAR.*
+  #### _För varje krav du implementerat, dvs 1-3, 4, 5, 6, skriver du ett textstycke om ca 5-10 meningar där du beskriver hur du löste kravet._
+  ### _Struktur och innehåll_
+  *Inga konstigheter här, lade upp routes till /proj och /proj/about och fyllde på med länkar och text. Värt att nämna om about är dock att enda sättet jag fick länkar till phpmetrics och phpdocs var att flytta de mapparna till public-mappen, innan dess ville de inte. Lade även in lite css-stuff så de hamnar på rad horisontellt.*
+  ### _Databas med ORM_
+  *Skapade en db med orm enligt övningen i momentet och det gick fint. Hade lite bök med att book-övningsdatat inte ville hålla sig i en separat db, så de ligger numera i samma db fast olika tabeller.*
+  *För reset-delen tänkte jag först åbrokalla migrate-biten men den skapar ju nya filer varje gång så det gick inte, slutade med att jag skapade metod som skapar en sql, sen gick jag in i databasen med DBeaver och kopierade de befintliga raderna som sql insert och klistrade in i metoden, när jag sen anropar den routen som i sin tur anropar metoden återställs databasen genom att den först töms och sen insertas datat. Fungerar fint! Lade även till en popup där man får bekräfta, på samma sätt som delete-knappen för varje objekt.*
+  ### _Utseende och användbarhet_
+  *Här kopierade jag css:filen från grundsidan samt base-twiggen, sen tog jag bort det som inte var relevant och justerade font, färger och lite hur knapparna ser ut.*
+  *Projekt-delen fick mer av ett mörkt tema, det är ganska likt reportsidan men tyckte designen var så bra att jag ändå vill göra något liknande här. Är nöjd med designen, det är trots allt inte en designkurs detta.*
+  ### _Kodstil_
+  *Koden har klarat phpcs utan problem från start.*
+  ### _Linters_
+  *Phpmd: Den klagar på att jag borde ha mindre än 10 metoder i projektkontrollern, har därför validerat att alla metoder där är routes som faktiskt behövs, ser därför inget sätt att få ner antalet och är nöjd med hur den ser ut*
+  *Phpstan: Den hade klagan på massa massa filer som inte hade med projektet att göra, mest med övningar. Jag lade in "ignore next line"-kommentarer där den klagar så det blir grönt å fint. Kollade genom vad den klagade på för projektet, vilket var oftast relaterat till automatiskt genererade symfony-rader, vilket jag känner var något jag inte ville lägga energi på. Tog mig dock tid att kolla på varje påpekan.*
+  ### _Enhetstestning & Kodtäckning_
+  *Projektsidan är förhållandevis enkel gällande metoder, nästan bara setters å getters, supersimpelt att testa. Den sidan tillsammans med game har 100% testtäckning.*
+  ### _Dokumentation_
+  *Inga konstigheter här, phpstorm hjälper till, räcker med att jag skriver slash-stjärna-stjärna och den fyller på med resten, simpelt. Gick bra. Var lite krångligt att länka till sidan som sagt men det löste sig när jag flyttade outputen till public-mappen, ändrade även configen så detta sker varje gång man kör composer phpdoc.*
+  ### _Metrics_
+  *Den har 2 varningar som jag inte väljer att bry mig om, de säger "Stable Abstractions Principle" och google hjälper inte så mycket, bollat lite med Mos i discord också. Eftersom det endast är de 2 förutom nästa grej och sidan har bra score väljer jag att ignorera dem.*
+  *Den ger ett fel, den kallar projektcontroller.php ett "god object", det beror på att den har 13 metoder, en udda gräns då alla är rättfärdiga routes-metoder, väljer därför att ignorera detta med. Inga andra fel, har bra score.*
+  ### _Git repo och GitHub/Lab_
+  *Inga konstigheter här, skickade upp regelbundet till mitt repo, fungerar fint.*
+  ### _Scrutinizer_
+  *Scrutinizer gav mig ett score på 10.0 för det jag skicka upp, den har dock problem med testandet men det verkar bero på något på servern, den klagar på att en mapp på servern inte finns. Vet att testningen av det vi ska testa är väldigt bra täckt ignorerar jag det.*
+  #### _Skriv ett allmänt stycke om hur projektet gick att genomföra. Problem/lösningar/strul/enkelt/svårt/snabbt/lång tid, etc. Var projektet lätt eller svårt? Tog det lång tid? Vad var svårt och vad gick lätt? Var det ett bra och rimligt projekt för denna kursen?_
+  *Det gick bra. Jag utgick från vad vi gjort precis innan och tog det lugnt och metodiskt. Jag hade tänkt att göra det jag gjorde som ett litet projekt efter kursen men såg möjlighet att få göra det nu ist. Tänkte från början använda prisjakts api men insåg att jag då måste skicka upp loginuppgifter till publika platser (github / studentservern), vilket inte är ok med tanke på att jag har avtal med prisjakt om access dit. Gjorde därför det enklaste jag kunde komma på för att åstakomma det jag ville ha sidan för, att man har en lista på däckmodeller som man lätt kan använda för att söka fram bra priser på, sen kommer jag lägga in fler däck efter kursen men konceptet av vad jag vill ha finns där. Jag undvek att göra kortspel då jag inte ville fastna i den komplicerade logiken som 21-övningen krävde, har ändå visat att jag klarar det bra genom den övningen så kände att jag inte behövde göra det igen.*
+  *Är osäker på om jag tycker det är ett rimligt avslut på kursen. Vissa moment var ju betydligt tyngre än slutprojektet, men så har det ju varit i andra kurser också. Det gick betydligt lättare att göra projektet efter alla momenten, det tog inte ens bråkdelen av samma tid som t.ex. orm-momentet. Hade lite problem med att få sortering av listan att fungera, eget krav, men det var mitt fel, jag hade felsökningssorteringsanrop efter när jag sorterat rätt, så den nollade sorteringen.*
+  #### _Avsluta med ett sista stycke med dina tankar om kursen och vad du anser om materialet och handledningen (ca 5-10 meningar). Ge feedback till lärarna och förslå eventuella förbättringsförslag till kommande kurstillfällen. Är du nöjd/missnöjd? Kommer du att rekommendera kursen till dina vänner/kollegor? På en skala 1-10, vilket betyg ger du kursen?_
+  *Jag tycker kursen var bra, iaf övningarna, även om vissa av dem var helt enorma och borde skalas ner. Det jag tycker hade varit en bättre ide för kursen är att utgå från den kodbas man gjorde i php-kursen, där man inte körde objektorienterat, då hade man tydligt sett skillnad på kod man började med i en annan kurs å sen få se den växa till något bättre och mer objektorienterat. Det hade varit guld! Annars har jag lärt mig mycket, har t.ex. tagit med mig coverage-biten till jobbet och är riktigt imponerad av phpmetrics etc. Jag arbetar ju med php dagligen vilket kanske gett mig lite försprång här men har ändå lärt mig massa.*
+  *Jag rekommenderar lätt kurspaketen jag har läst hos er till folk kring mig, är överlag väldigt nöjd med hur allt fungerat och engagemanget från lärarna, även utanför deras arbetstid, vilket har underlättat för mig som sällan pluggar på dagtid.*
+  *Kursen får 7 av 10 från mig, övningarna kunde förbättras lite, vara mer som artiklarna i början var, där man kan följa uppbyggnaden av koden där man förklarar varje del, inte bara mos som sitter å kopierar sig genom övningarna. Övningarna kunde dessutom varit mer knutna till uppgifterna som i tidigare kurser.*

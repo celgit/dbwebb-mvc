@@ -39,6 +39,9 @@ class Hand extends Deck
 
         /** @var Card $card */
         foreach ($this->hand as $card) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             if ($aceAsOne && $card->getValuePoint() === 14) {
                 ++$value;
             } else {

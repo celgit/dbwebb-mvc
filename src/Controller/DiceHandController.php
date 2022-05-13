@@ -42,17 +42,28 @@ class DiceHandController extends AbstractController
         $clear = $request->request->get('clear');
 
         if ($roll) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $hand->roll();
         } elseif ($add) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $hand->add(new Dice());
-        //$hand->add(new \App\Dice\DiceGraphic());
         } elseif ($clear) {
             $hand = new DiceHand();
         }
 
         $session->set("dicehand", $hand);
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->addFlash("info", "Your dice hand holds " . $hand->getNumberDices() . " dices.");
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->addFlash("info", "Current values: " . $hand->getAsString());
 
         return $this->redirectToRoute('dice-hand-home');

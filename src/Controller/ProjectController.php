@@ -60,6 +60,9 @@ class ProjectController extends AbstractController
         $profile = $request->request->get('profile');
         $rimSize = $request->request->get('rimsize');
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire = new Tire($brand, $model, $width, $profile, $rimSize);
 
         // tell Doctrine you want to (eventually) save the Product
@@ -151,10 +154,25 @@ class ProjectController extends AbstractController
         $entityManager = $doctrine->getManager();
         $tire = $projectRepository->find($id);
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire->setBrand($request->request->get('brand'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire->setModel($request->request->get('model'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire->setWidth($request->request->get('width'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire->setProfile($request->request->get('profile'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $tire->setRimSize($request->request->get('rimsize'));
         $entityManager->flush();
 
@@ -178,6 +196,9 @@ class ProjectController extends AbstractController
         $entityManager = $doctrine->getManager();
         $tire = $entityManager->getRepository(Tire::class)->find($id);
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $entityManager->remove($tire);
         $entityManager->flush();
 

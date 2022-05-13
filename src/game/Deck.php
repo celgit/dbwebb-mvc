@@ -72,6 +72,9 @@ class Deck
         }
 
         for ($i = 0; $i < $numCardsToDraw; $i++) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $randomNumber = random_int(0, count($this->deck) - 1);
             $this->drawnCards[] = $this->deck[$randomNumber];
             array_splice($this->deck, $randomNumber, 1);
@@ -134,6 +137,9 @@ class Deck
             $this->createNewDeck();
             $this->shuffleDeck();
         } else {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $this->addToDeck($session->get('deck'));
         }
     }

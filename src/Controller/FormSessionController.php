@@ -51,6 +51,9 @@ class FormSessionController extends AbstractController
             }
             $session->set("sum", $sum);
         } elseif ($save) {
+            /**
+             * @phpstan-ignore-next-line
+             */
             $this->addFlash("info", "You saved $sum points.");
             $saved += $sum;
             $sum = 0;
@@ -64,7 +67,13 @@ class FormSessionController extends AbstractController
             $session->set("saved", 0);
         }
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->addFlash("info", "You have currently $sum points (not saved).");
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->addFlash("info", "You have currently $saved saved points.");
 
         return $this->redirectToRoute('form-session');

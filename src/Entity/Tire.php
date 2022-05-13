@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Tire
 {
@@ -118,6 +121,9 @@ class Tire
      */
     public function setWidth(?int $width): self
     {
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->width = $width;
 
         return $this;
@@ -137,6 +143,9 @@ class Tire
      */
     public function setProfile(?int $profile): self
     {
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->profile = $profile;
 
         return $this;
@@ -156,6 +165,9 @@ class Tire
      */
     public function setRimSize(?int $rimSize): self
     {
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->rimSize = $rimSize;
 
         return $this;

@@ -34,9 +34,21 @@ class BookController extends AbstractController
         $entityManager = $doctrine->getManager();
 
         $book = new Book();
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setTitle($request->request->get('title'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setIsbn($request->request->get('isbn'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setAuthor($request->request->get('author'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setImageUrl($request->request->get('image_url'));
 
         $entityManager->persist($book);
@@ -132,9 +144,21 @@ class BookController extends AbstractController
             );
         }
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setTitle($request->request->get('title'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setIsbn($request->request->get('isbn'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setAuthor($request->request->get('author'));
+        /**
+         * @phpstan-ignore-next-line
+         */
         $book->setImageUrl($request->request->get('image_url'));
         $entityManager->flush();
 

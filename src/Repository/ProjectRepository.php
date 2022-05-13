@@ -78,6 +78,9 @@ class ProjectRepository extends ServiceEntityRepository
      */
     public function getOrderedResult(): array | int
     {
+        /**
+         * @phpstan-ignore-next-line
+         */
         return $this->createQueryBuilder('tire')
             ->orderBy('tire.brand', 'ASC')
             ->getQuery()

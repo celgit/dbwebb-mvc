@@ -821,10 +821,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ProjectController.html#method_deleteTireById"
         },                {
-            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Ametrics\u0028\u0029",
-            "name": "metrics",
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AdocsMetrics\u0028\u0029",
+            "name": "docsMetrics",
             "summary": "",
-            "url": "classes/App-Controller-ProjectController.html#method_metrics"
+            "url": "classes/App-Controller-ProjectController.html#method_docsMetrics"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AphpDocs\u0028\u0029",
+            "name": "phpDocs",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_phpDocs"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Acoverage\u0028\u0029",
+            "name": "coverage",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_coverage"
         },                {
             "fqsen": "\\App\\Entity\\Tire",
             "name": "Tire",

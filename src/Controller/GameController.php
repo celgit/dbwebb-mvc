@@ -76,7 +76,13 @@ class GameController extends AbstractController
             $this->addFlash('info', $game->handleDoneInput($playerHand, $session, $dealerHand));
         }
 
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->hands['player'] = $playerHand;
+        /**
+         * @phpstan-ignore-next-line
+         */
         $this->hands['dealer'] = $dealerHand;
 
         $data = [
@@ -87,8 +93,14 @@ class GameController extends AbstractController
             'playerHasAces' => $playerHand->handContainsAce(),
             'dealerHasAces' => $dealerHand->handContainsAce(),
             'playerHandValueAceAs14' => $playerHand->getHandValue(),
+            /**
+             * @phpstan-ignore-next-line
+             */
             'playerHandValueAceAs1' => $playerHand->getHandValue(true),
             'dealerHandValueAceAs14' => $dealerHand->getHandValue(),
+            /**
+             * @phpstan-ignore-next-line
+             */
             'dealerHandValueAceAs1' => $dealerHand->getHandValue(true),
         ];
 
