@@ -28,13 +28,12 @@ table, th, td {
 }
 
 .textHandle {
-  text-align: left;
+  /*text-align: left;*/
   margin-left: 200px;
   margin-right: 200px;
 }
 
 .siteheader {
-  background-color: #545b62;
   color: whitesmoke;
   min-height: 60px;
   min-width: 100%;
@@ -42,7 +41,6 @@ table, th, td {
 
 .navbar {
   text-align: center;
-  background-color: #545b62;
   margin-bottom: 24px;
   padding: 0.5em;
 }
@@ -66,7 +64,6 @@ table, th, td {
 }
 
 .sitefooter {
-  background-color: #545b62;
   height: 50px;
   line-height: 50px; /*Detta fixar vertical align av texten*/
   min-width: 100%;

@@ -8,20 +8,14 @@
     </head>
     <body>
     <div class="siteheader">
-        <h1> dbwebb-mvc of chln20</h1>
+        <h1> Car tire utility</h1>
     </div>
     <div class="navbar">
         <nav>
             <ul>
-                <a href="{{ url("home") }}">Home</a> |
-                <a href="{{ path("about") }}">About</a> |
-                <a href="{{ path("report") }}">Report</a> |
-                <a href="{{ path("card") }}">Cards</a> |
-                <a href="{{ path("exercises") }}">Exercises</a> |
-                <a href="{{ path("game-home") }}">Game</a> |
-                <a href="{{ path("app_books") }}">Books</a> |
-                <a href="{{ path("metrics") }}">Metrics</a> |
-                <a href="{{ path("app_project") }}">Proj</a>
+                <a href="{{ path("tires_show_all") }}">View tires</a> |
+                <a href="{{ path("register_tire_form") }}">Register tire</a> |
+                <a href="{{ path("proj_about") }}">About</a> |
             </ul>
         </nav>
     </div>
@@ -30,6 +24,7 @@
     Default content
     {% endblock %}
 
+    <hr>
     <div class="sitefooter center">
         Copyright chln20 @ 2022
     </div>

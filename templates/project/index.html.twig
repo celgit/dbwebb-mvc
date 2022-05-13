@@ -1,10 +1,21 @@
 {% extends 'base_project.html.twig' %}
 
-{% block title %}Hello ProjectController!{% endblock %}
+{% block title %}Tire utlity!{% endblock %}
 
 {% block content %}
-<div>
-    <h3><a href="{{ path("proj_about") }}">About this project</a></h3>
-    <h3><a href="{{ path("tires_show_all") }}">Show all tires</a></h3>
+<div class="textHandle">
+    <h1>Welcome to my simple page.</h1>
+    The purpose of this page is for you to be able to register tire-models
+    and then they will be saved in a database, displayed in a table and a link
+    to a price-search-page will be generated, if you click that it will take you
+    to that page and a search for that specific model of tire will be performed
+    automatically.<br>
+    <br>
+    To view all tires, click the "View tires" in the menu-bar.<br>
+    To register a new tire, either click the "Register tire"-item in the menu
+    or go to "View tires" and then click "Register new tire" in the bottom
+    of the table.<br>
+    <br>
+    To read information about this page, click the "About"-option in the menu-bar.
 </div>
 {% endblock %}
